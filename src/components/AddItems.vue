@@ -1,5 +1,6 @@
 <template>
 <div id="menuList" >
+  <h1>{{ msg }}</h1>
   <div class="header"><hr><h3 style="color: white;"> Menus</h3><hr></div>
   <div  class="column">
   Add Item:<br><br>
