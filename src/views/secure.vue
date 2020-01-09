@@ -1,7 +1,7 @@
 <template>
     <div id="secure">
         <h1>Secure Area</h1>
-        <AddItems msg="AAYULOGIC CANTEEN MANAGEMENT SYSTEM</h1>"/>
+        <AddItems msg="AAYULOGIC CANTEEN MANAGEMENT APP</h1>"/>
     </div>
 </template>
 
