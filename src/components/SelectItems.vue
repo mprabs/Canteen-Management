@@ -1,5 +1,6 @@
 <template>
-<div class="jumbotron" id="menuList" >
+<div class="jumbotron" id="menuList" >  <h1> AAYULOGIC CANTEEN MANAGEMENT </h1>
+
   <hr> <h3> Available Menus </h3> <hr>
   <pre>You can select only one of the items.</pre>
   <div>
@@ -8,18 +9,22 @@
         <td>Id</td>
         <td>Name of items</td>
       </tr>
-      <tr v-for="item in dataList" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
+      <tr v-for="item in items" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
           <td> {{ item.id }} </td>
           <td> {{ item.name }} </td>
       </tr>
     </table>
   </div>
-  <pre v-for="thing in selectedItems" :key="thing.id"> You selected <h2> {{ thing.name }} </h2> </pre> <br>
-  <button @click="addModal"> Verify </button>
+  <div v-for="thing in selectedItems" :key="thing.id">
+    <pre> You selected <h2> {{ thing.name }} </h2> </pre> <br>
+    <button @click="addModal(thing.name)"> Verify </button>
+  </div>
 </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'menuList',
   data: function () {
@@ -33,14 +38,12 @@ export default {
       this.selectedItems.splice(1, 1)
     },
     addModal: function (name, id) {
-      alert('Your selected item is' + name).then(() => {
+      alert('Your selected item is ' + name).then(() => {
         console.log('Alert closed.')
       })
     }
   },
-  props: [
-    'dataList'
-  ]
+  computed: mapGetters(['items'])
 }
 </script>
 
@@ -50,11 +53,18 @@ export default {
 #FoodMenu {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  // width: 30%;
+  width: 100%;
 }
 
-#FoodMenu td {
-  border: 1px solid rgb(70, 67, 67);
+#FoodMenu th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #404040;
+  color: white;
+}
+#FoodMenu td, th {
+  border: 1px solid #404040;
   padding: 8px;
 }
 
@@ -62,28 +72,30 @@ export default {
 
 #FoodMenu tr:hover {background-color: #ddd;}
 
-table, td {
-  margin: auto;
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
 }
 
 * {
   box-sizing: border-box;
-}
 
-li {
-    list-style-type: none;
 }
-
 button {
-  background-color: #23409e;
+  background-color: #404040;
   border: none;
   color: white;
-  padding: 10px 19px;
+  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+.header {
+  background-color: #404040;
 }
 </style>

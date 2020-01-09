@@ -28,20 +28,14 @@
   </table><br>
   <router-link to="/SelectItems" tag="button" >Verify</router-link>
   </div>
-  <SelectItems :dataList="items"></SelectItems>
+  <!-- <SelectItems :dataList="items"></SelectItems> -->
 </div>
 </template>
 
 <script>
-import SelectItems from '../components/SelectItems'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'menuList',
-  data: function () {
-    return {
-      items: [{ name: 'Cauli ', id: 1 }, { name: 'Potato', id: 2 }]
-    }
-  },
   methods: {
     addEntry: function (name) {
       if (this.name === '') {
@@ -58,9 +52,7 @@ export default {
     //   this.$route.push({ items: [{ name: 'Cauli ', id: 1 }, { name: 'Potato', id: 2 }] })
     // }
   },
-  components: {
-    SelectItems
-  }
+  computed: mapGetters(['items'])
 }
 </script>
 

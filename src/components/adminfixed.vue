@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h1>this is a fixed page with side notification panel for admin portal.</h1>
-<P> I am Rohit Shrestha</P>
+    <p>this is a fixed page with side notification panel for admin portal.</p>
+
         <p>
             This is a secure area
         </p>
