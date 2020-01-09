@@ -1,33 +1,45 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home'
+import Router from 'vue-router'
+import LoginComponent from '../views/login.vue'
+import SecureComponent from '../views/secure.vue'
+import register from '../views/register.vue'
 import AddItems from '../components/AddItems'
 import SelectItems from '../components/SelectItems'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/AddItems',
-    name: 'AddItems',
-    component: AddItems
-  },
-  {
-    path: '/SelectItems',
-    name: 'SelectItems',
-    component: SelectItems
-  }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      redirect: {
+        name: 'login'
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginComponent
+    },
+    {
+      path: '/secure',
+      name: 'secure',
+      component: SecureComponent
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/AddItems',
+      name: 'AddItems',
+      component: AddItems
+    },
+    {
+      path: '/SelectItems',
+      name: 'SelectItems',
+      component: SelectItems
+    }
+  ]
 })
-
-export default router
