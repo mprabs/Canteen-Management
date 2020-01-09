@@ -1,16 +1,16 @@
 <template>
     <div id="secure">
         <h1>Secure Area</h1>
-        <adminfixed msg="abc"/>
+        <AddItems msg="AAYULOGIC CANTEEN MANAGEMENT </h1>"/>
     </div>
 </template>
 
 <script>
-import adminfixed from '../components/adminfixed.vue'
+import AddItems from '../components/AddItems.vue'
 export default {
   name: 'Secure',
   components: {
-    adminfixed
+    AddItems
   },
   data () {
     return {}
