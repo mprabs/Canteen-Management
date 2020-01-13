@@ -1,12 +1,14 @@
 <template>
 <div id="menuList" >
-  <h1>{{ msg }}</h1>
+  <!-- <h1>{{ msg }}</h1> -->
   <div class="header"><hr><h3 style="color: white;"> Menus</h3><hr></div>
   <div  class="column">
   Add Item:<br><br>
-  <input v-model="name" placeholder="Item name">
-  <br><br>
-  <button @click="addEntry" class="btn btn-danger"> Add </button>
+  <form @submit="addEntry">
+    <input v-model="name" placeholder="Item name">
+    <br><br>
+    <button type="submit" class="btn btn-danger"> Add </button>
+  </form>
   </div>
   <div  class="column">
     Item Lists for tomorrow : <br><br>
@@ -16,14 +18,15 @@
       <th>Name of items</th>
       <th></th>
     </thead>
-      <tr v-for="item in items" :key="item.id">
+      <tr v-for="item in items" :key="item.id"  >
         <td>
           {{ item.id }}
         </td>
         <td>
-        {{ item.name }}
+          {{ item.name }}
         </td>
-        <td @click="removeElement(id)" style="cursor:pointer"> Remove </td>
+        <td @click='removeElement(item.id)' style="cursor:pointer"> Remove </td>
+        <!-- {{ item.id }} -->
       </tr>
   </table><br>
   <router-link to="/SelectItems" tag="button" >Verify</router-link>
@@ -33,27 +36,36 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
+// import api from '@/store/index.js'
 export default {
   name: 'menuList',
+  data () {
+    return {
+      name
+    }
+  },
   methods: {
     addEntry: function (name) {
       if (this.name === '') {
         alert('Enter something to add !')
       } else {
-        this.items.push({ name: this.name.toUpperCase(), id: this.id })
+        // console.log('Name', this.name)
+        this.$store.dispatch('addItem', this.name)
         this.name = ''
       }
     },
-    removeElement: function (index) {
-      this.items.splice(index, 1)
+    removeElement: function (id) {
+      this.$store.dispatch('removeItem', id)
     }
-    // verifyEntry: function () {
-    //   this.$route.push({ items: [{ name: 'Cauli ', id: 1 }, { name: 'Potato', id: 2 }] })
-    // }
   },
-  computed: mapGetters(['items'])
+  computed: {
+    items: function () {
+      return this.$store.getters.items
+    }
+  }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
