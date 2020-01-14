@@ -7,7 +7,6 @@
         <input type="password" name="password" v-model="input.password" placeholder="Password" /><br><br>
         <button type="button" v-on:click="login()">Login</button>
     </div><br><br>
-  <!-- <pre> Don't have an account? <br> Click here to <router-link to="/register"> Register.</router-link> </pre> -->
   </div>
 </template>
 
