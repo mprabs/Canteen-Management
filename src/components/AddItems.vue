@@ -5,7 +5,7 @@
   <div  class="column">
   Add Item:<br><br>
   <form @submit="addEntry">
-    <input v-model="name" placeholder="Item name">
+    <input v-model="name" placeholder="Item name" v-on:keyup.enter="submit">
     <br><br>
     <button type="submit" class="btn btn-danger"> Add </button>
   </form>
@@ -18,7 +18,7 @@
       <th>Name of items</th>
       <th></th>
     </thead>
-      <tr v-for="item in items" :key="item.id"  >
+      <tr v-for="item in items" :key="item.id">
         <td>
           {{ item.id }}
         </td>
@@ -29,7 +29,7 @@
         <!-- {{ item.id }} -->
       </tr>
   </table><br>
-  <router-link to="/SelectItems" tag="button" >Verify</router-link>
+  <router-link to="/selectMenus" tag="button" >Verify</router-link>
   </div>
   <!-- <SelectItems :dataList="items"></SelectItems> -->
 </div>

@@ -5,6 +5,7 @@ import SecureComponent from '../views/secure.vue'
 import register from '../views/register.vue'
 import AddItems from '..//components/AddItems'
 import SelectItems from '../components/SelectItems'
+import selectMenus from '../components/selectMenus'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/SelectItems',
       name: 'SelectItems',
       component: SelectItems
+    },
+    {
+      path: '/selectMenus',
+      name: 'selectMenus',
+      component: selectMenus
     }
   ]
 })

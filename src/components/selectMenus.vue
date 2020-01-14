@@ -1,24 +1,33 @@
 <template>
 <div class="jumbotron" id="menuList" >  <h1> AAYULOGIC CANTEEN MANAGEMENT </h1>
 
-  <hr> <h3> Available Menus </h3> <hr>
-  <pre>You can select only one of the items.</pre>
-  <div>
+  <hr> <h3> Food Listings </h3> <hr>
+  <!-- <pre>You can select only one of the items.</pre> -->
+  <div class="column">
     <table id="FoodMenu" >
       <tr>
         <td>Id</td>
         <td>Name of items</td>
       </tr>
-      <tr v-for="item in items" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
+      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer" @click:selected='true'>
           <td> {{ item.id }} </td>
           <td> {{ item.name }} </td>
       </tr>
     </table>
   </div>
-  <div v-for="thing in selectedItems" :key="thing.id">
-    <pre> You selected <h2> {{ thing.name }} </h2> </pre> <br>
-    <button @click="addModal(thing.name)"> Verify </button>
+  <div class="column">
+    You selected :
+    <div v-for="thing in selectedItems" :key="thing.id">
+        <table>
+          <tr>
+        <td><pre> {{ thing.id }} </pre> <br></td>
+        <td><pre> {{ thing.name }} </pre> <br></td>
+        <a @click="removeItem(thing.id)" style="cursor: pointer" ><td > Remove </td></a>
+          </tr>
+        </table>
+    </div>
   </div>
+        <router-link to="/SelectItems" tag="button"> Verify </router-link>
 </div>
 </template>
 
@@ -26,27 +35,21 @@
 
 export default {
   name: 'menuList',
-  data: function () {
-    return {
-      selectedItems: []
-    }
-  },
   methods: {
-    selectElement: function (name, id) {
-      this.selectedItems.unshift({ name })
-      this.selectedItems.splice(1, 1)
+    selectElement: function (item) {
+      this.$store.dispatch('selectItem', item)
     },
-    addModal: function (name, id) {
-      alert('Your selected item is ' + name).then(() => {
-        console.log('Alert closed.')
-      })
+    removeItem: function (id) {
+      this.$store.dispatch('deleteItem', id)
     }
   },
   computed: {
     items: function () {
       return this.$store.getters.items
+    },
+    selectedItems: function () {
+      return this.$store.getters.selectedItems
     }
-
   }
 }
 </script>
