@@ -12,6 +12,7 @@
   </div>
   <div  class="column">
     Item Lists for tomorrow : <br><br>
+    <!-- <button @click="showData">Show List</button> -->
     <table id="FoodMenu" >
     <thead>
       <th>Id</th>
@@ -59,11 +60,18 @@ export default {
     removeElement: function (id) {
       this.$store.dispatch('removeItem', id)
     }
+    // showData: function () {
+    //   this.$store.dispatch('loadItems')
+    // }
+
   },
   computed: {
     items: function () {
       return this.$store.getters.items
     }
+  },
+  mounted () {
+    this.$store.dispatch('loadItems')
   }
   // mounted: Axios.get('http://fff07418.ngrok.io/myapp/fooditem/')
   //   .then(response =>

@@ -1,0 +1,121 @@
+[1mdiff --git a/src/components/AddItems.vue b/src/components/AddItems.vue[m
+[1mindex ba62aa0..efdc3eb 100644[m
+[1m--- a/src/components/AddItems.vue[m
+[1m+++ b/src/components/AddItems.vue[m
+[36m@@ -12,6 +12,7 @@[m
+   </div>[m
+   <div  class="column">[m
+     Item Lists for tomorrow : <br><br>[m
+[32m+[m[32m    <!-- <button @click="showData">Show List</button> -->[m
+     <table id="FoodMenu" >[m
+     <thead>[m
+       <th>Id</th>[m
+[36m@@ -59,11 +60,18 @@[m [mexport default {[m
+     removeElement: function (id) {[m
+       this.$store.dispatch('removeItem', id)[m
+     }[m
+[32m+[m[32m    // showData: function () {[m
+[32m+[m[32m    //   this.$store.dispatch('loadItems')[m
+[32m+[m[32m    // }[m
+[32m+[m
+   },[m
+   computed: {[m
+     items: function () {[m
+       return this.$store.getters.items[m
+     }[m
+[32m+[m[32m  },[m
+[32m+[m[32m  mounted () {[m
+[32m+[m[32m    this.$store.dispatch('loadItems')[m
+   }[m
+   // mounted: Axios.get('http://fff07418.ngrok.io/myapp/fooditem/')[m
+   //   .then(response =>[m
+[1mdiff --git a/src/store/index.js b/src/store/index.js[m
+[1mindex 321af34..3cc0fdb 100644[m
+[1m--- a/src/store/index.js[m
+[1m+++ b/src/store/index.js[m
+[36m@@ -1,27 +1,27 @@[m
+ import Vue from 'vue'[m
+ import Vuex from 'vuex'[m
+ // import api from './api.js'[m
+[31m-// import Axios from 'axios'[m
+[32m+[m[32mimport Axios from 'axios'[m
+ [m
+ Vue.use(Vuex)[m
+ [m
+ export default new Vuex.Store({[m
+   state: {[m
+[31m-    allItems: [[m
+[31m-      {[m
+[31m-        name: 'Cauli',[m
+[31m-        id: '1'[m
+[31m-      },[m
+[31m-      {[m
+[31m-        name: 'Potato',[m
+[31m-        id: '2'[m
+[31m-      }[m
+[31m-    ],[m
+[32m+[m[32m    allItems: [],[m
+     selectItems: [][m
+   },[m
+   mutations: {[m
+     complete_add: function (state, newName) {[m
+[31m-      state.allItems.push({ name: newName.name, id: Number(state.allItems[state.allItems.length - 1].id) + 1 })[m
+[32m+[m[32m      Axios({[m
+[32m+[m[32m        method: 'post',[m
+[32m+[m[32m        url: 'http://f50701ce.ngrok.io/myapp/fooditem/',[m
+[32m+[m[32m        data: {[m
+[32m+[m[32m          name: newName.name[m
+[32m+[m[32m        }[m
+[32m+[m[32m      })[m
+[32m+[m[32m      // commit('SAVE_ITEMS', response)[m
+[32m+[m[32m      // console.log('items yei ho', response)[m
+[32m+[m[32m      // state.allItems.push({ name: newName.name, id: Number(state.allItems[state.allItems.length - 1].id) + 1 })[m
+     },[m
+     selectNew: function (state, newSelectitem) {[m
+       // console.log('suru', state.selectItems[0])[m
+[36m@@ -38,7 +38,9 @@[m [mexport default new Vuex.Store({[m
+ [m
+       for (var i = 0; i < state.allItems.length; i++) {[m
+         if (state.allItems[i].id === delIndex.id) {[m
+[31m-          state.allItems.splice(i, 1)[m
+[32m+[m[32m          Axios.delete('http://f50701ce.ngrok.io/myapp/fooditem/' + delIndex.id).then(response =>[m
+[32m+[m[32m            response.splice(i, 1)[m
+[32m+[m[32m          )[m
+         }[m
+       }[m
+     },[m
+[36m@@ -50,10 +52,10 @@[m [mexport default new Vuex.Store({[m
+           state.selectItems.splice(i, 1)[m
+         }[m
+       }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    SAVE_ITEMS: function (state, response) {[m
+[32m+[m[32m      state.allItems = response.data[m
+     }[m
+[31m-    // SAVE_ITEMS: function (state, response) {[m
+[31m-    //   state.allItems = response.data[m
+[31m-    // }[m
+   },[m
+   actions: {[m
+     addItem: function ({ commit }, newName, newId) {[m
+[36m@@ -81,13 +83,14 @@[m [mexport default new Vuex.Store({[m
+         id: delIndex[m
+       }[m
+       commit('deleteItems', delNew)[m
+[31m-    }[m
+[32m+[m[32m    },[m
+     // loadItems ({ commit }) {[m
+[31m-    // loadUsers: function ({ commit }) {[m
+[31m-    //   Axios.get('http://fff07418.ngrok.io/myapp/fooditem/').then(response => {[m
+[31m-    //     commit('SAVE_ITEMS', response)[m
+[31m-    //   })[m
+[31m-    // }[m
+[32m+[m[32m    loadItems: function ({ commit }) {[m
+[32m+[m[32m      Axios.get('http://f50701ce.ngrok.io/myapp/fooditem/').then(response => {[m
+[32m+[m[32m        commit('SAVE_ITEMS', response)[m
+[32m+[m[32m        // console.log('items yei ho', response)[m
+[32m+[m[32m      })[m
+[32m+[m[32m    }[m
+   },[m
+   getters: {[m
+     items: (state) => state.allItems,[m

@@ -1,27 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import api from './api.js'
-// import Axios from 'axios'
+import Axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    allItems: [
-      {
-        name: 'Cauli',
-        id: '1'
-      },
-      {
-        name: 'Potato',
-        id: '2'
-      }
-    ],
+    allItems: [],
     selectItems: []
   },
   mutations: {
     complete_add: function (state, newName) {
-      state.allItems.push({ name: newName.name, id: Number(state.allItems[state.allItems.length - 1].id) + 1 })
+      Axios({
+        method: 'post',
+        url: 'http://f50701ce.ngrok.io/myapp/fooditem/',
+        data: {
+          name: newName.name
+        }
+      })
+      // commit('SAVE_ITEMS', response)
+      // console.log('items yei ho', response)
+      // state.allItems.push({ name: newName.name, id: Number(state.allItems[state.allItems.length - 1].id) + 1 })
     },
     selectNew: function (state, newSelectitem) {
       // console.log('suru', state.selectItems[0])
@@ -38,7 +38,9 @@ export default new Vuex.Store({
 
       for (var i = 0; i < state.allItems.length; i++) {
         if (state.allItems[i].id === delIndex.id) {
-          state.allItems.splice(i, 1)
+          Axios.delete('http://f50701ce.ngrok.io/myapp/fooditem/' + delIndex.id).then(response =>
+            response.splice(i, 1)
+          )
         }
       }
     },
@@ -50,10 +52,10 @@ export default new Vuex.Store({
           state.selectItems.splice(i, 1)
         }
       }
+    },
+    SAVE_ITEMS: function (state, response) {
+      state.allItems = response.data
     }
-    // SAVE_ITEMS: function (state, response) {
-    //   state.allItems = response.data
-    // }
   },
   actions: {
     addItem: function ({ commit }, newName, newId) {
@@ -81,13 +83,14 @@ export default new Vuex.Store({
         id: delIndex
       }
       commit('deleteItems', delNew)
-    }
+    },
     // loadItems ({ commit }) {
-    // loadUsers: function ({ commit }) {
-    //   Axios.get('http://fff07418.ngrok.io/myapp/fooditem/').then(response => {
-    //     commit('SAVE_ITEMS', response)
-    //   })
-    // }
+    loadItems: function ({ commit }) {
+      Axios.get('http://f50701ce.ngrok.io/myapp/fooditem/').then(response => {
+        commit('SAVE_ITEMS', response)
+        // console.log('items yei ho', response)
+      })
+    }
   },
   getters: {
     items: (state) => state.allItems,
