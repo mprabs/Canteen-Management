@@ -19,9 +19,6 @@ export default new Vuex.Store({
           name: newName.name
         }
       })
-      // commit('SAVE_ITEMS', response)
-      // console.log('items yei ho', response)
-      // state.allItems.push({ name: newName.name, id: Number(state.allItems[state.allItems.length - 1].id) + 1 })
     },
     selectNew: function (state, newSelectitem) {
       // console.log('suru', state.selectItems[0])

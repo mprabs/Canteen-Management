@@ -4,7 +4,7 @@
   <div class="header"><hr><h3 style="color: white;"> Menus</h3><hr></div>
   <div  class="column">
   Add Item:<br><br>
-  <form @submit="addEntry">
+  <form @submit="addEntry; loadItems;">
     <input v-model="name" placeholder="Item name" v-on:keyup.enter="submit">
     <br><br>
     <button type="submit" class="btn btn-danger"> Add </button>
@@ -70,8 +70,10 @@ export default {
       return this.$store.getters.items
     }
   },
-  mounted () {
-    this.$store.dispatch('loadItems')
+  mounted: {
+    loadItems: function () {
+      this.$store.dispatch('loadItems')
+    }
   }
   // mounted: Axios.get('http://fff07418.ngrok.io/myapp/fooditem/')
   //   .then(response =>

@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     items: function () {
-      return this.$store.getters.items
+      return this.$store.getters.selectedItems
     }
 
   }
