@@ -7,7 +7,7 @@
         <input type="password" name="password" v-model="input.password" placeholder="Password" /><br><br>
         <button type="button" v-on:click="login()">Login</button>
     </div><br><br>
-  <pre> Don't have an account? <br> Click here to <router-link to="/register"> Register.</router-link> </pre>
+  <!-- <pre> Don't have an account? <br> Click here to <router-link to="/register"> Register.</router-link> </pre> -->
   </div>
 </template>
 
@@ -19,22 +19,26 @@ export default {
       input: {
         username: '',
         password: ''
-      }
+      },
+      user: []
     }
   },
   methods: {
     login () {
-      if (this.input.username !== '' && this.input.password !== '') {
-        if (this.input.username === this.$parent.mockAccount.username && this.input.password === this.$parent.mockAccount.password) {
-          this.$emit('authenticated', true)
-          this.$router.replace({ name: 'secure' })
-          // add a condition where you redirect to different pages once you login after verifying the authentication.
-        } else {
-          alert('The username and / or password is incorrect')
-        }
-      } else {
-        alert('A username and password must be present')
-      }
+      this.$axios
+        .post('http://f50701ce.ngrok.io/token-auth/', {
+          username: this.input.username,
+          password: this.input.password })
+        .then(response => {
+          if (response.data) {
+            this.user = response.data
+            localStorage.setItem('user', JSON.stringify(response.data))
+            this.$emit('authenticated', true)
+            this.$router.replace({ name: 'secure' })
+          } else {
+            alert('The username and / or password is incorrect')
+          }
+        })
     }
   }
 }

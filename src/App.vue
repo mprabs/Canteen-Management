@@ -12,17 +12,12 @@ export default {
   name: 'App',
   data () {
     return {
-      authenticated: false,
-      mockAccount: {
-        username: 'asdf',
-        password: 'zxcv'
-      }
-    }
+      authenticated: false }
   },
   mounted () {
-    if (!this.authenticated) {
-      this.$router.replace({ name: 'login' })
-    }
+    // if (!this.authenticated) {
+    //   this.$router.replace({ name: 'login' })
+    // }
   },
   methods: {
     setAuthenticated (status) {
