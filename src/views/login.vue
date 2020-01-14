@@ -25,7 +25,7 @@ export default {
   methods: {
     login () {
       this.$axios
-        .post('http://f50701ce.ngrok.io/token-auth/', {
+        .post('http://f641d72e.ngrok.io/token-auth/', {
           username: this.input.username,
           password: this.input.password })
         .then(response => {

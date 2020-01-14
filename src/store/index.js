@@ -14,7 +14,7 @@ export default new Vuex.Store({
     complete_add: function (state, newName) {
       Axios({
         method: 'post',
-        url: 'http://f50701ce.ngrok.io/myapp/fooditem/',
+        url: 'http://f641d72e.ngrok.io/myapp/fooditem/',
         data: {
           name: newName.name
         }
@@ -38,7 +38,7 @@ export default new Vuex.Store({
 
       for (var i = 0; i < state.allItems.length; i++) {
         if (state.allItems[i].id === delIndex.id) {
-          Axios.delete('http://f50701ce.ngrok.io/myapp/fooditem/' + delIndex.id).then(response =>
+          Axios.delete('http://f641d72e.ngrok.io/myapp/fooditem/' + delIndex.id).then(response =>
             response.splice(i, 1)
           )
         }
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     },
     // loadItems ({ commit }) {
     loadItems: function ({ commit }) {
-      Axios.get('http://f50701ce.ngrok.io/myapp/fooditem/').then(response => {
+      Axios.get('http://f641d72e.ngrok.io/myapp/fooditem/').then(response => {
         commit('SAVE_ITEMS', response)
         // console.log('items yei ho', response)
       })
