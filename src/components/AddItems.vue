@@ -36,6 +36,7 @@
 </template>
 
 <script>
+// import Axios from 'axios'
 // import { mapGetters } from 'vuex'
 // import api from '@/store/index.js'
 export default {
@@ -64,6 +65,11 @@ export default {
       return this.$store.getters.items
     }
   }
+  // mounted: Axios.get('http://fff07418.ngrok.io/myapp/fooditem/')
+  //   .then(response =>
+  //     console.log(response)
+  //     // this.$store.dispatch('addItem', element.name)
+  //   )
 }
 
 </script>

@@ -1,18 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import api from './api.js'
+// import Axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    allItems: [{
-      name: 'Cauli',
-      id: '1'
-    },
-    {
-      name: 'Potato',
-      id: '2'
-    }],
+    allItems: [
+      {
+        name: 'Cauli',
+        id: '1'
+      },
+      {
+        name: 'Potato',
+        id: '2'
+      }
+    ],
     selectItems: []
   },
   mutations: {
@@ -47,6 +51,9 @@ export default new Vuex.Store({
         }
       }
     }
+    // SAVE_ITEMS: function (state, response) {
+    //   state.allItems = response.data
+    // }
   },
   actions: {
     addItem: function ({ commit }, newName, newId) {
@@ -75,6 +82,12 @@ export default new Vuex.Store({
       }
       commit('deleteItems', delNew)
     }
+    // loadItems ({ commit }) {
+    // loadUsers: function ({ commit }) {
+    //   Axios.get('http://fff07418.ngrok.io/myapp/fooditem/').then(response => {
+    //     commit('SAVE_ITEMS', response)
+    //   })
+    // }
   },
   getters: {
     items: (state) => state.allItems,
