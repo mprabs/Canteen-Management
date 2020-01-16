@@ -4,7 +4,7 @@ import LoginComponent from '../views/login.vue'
 import AdminPage from '../views/adminPage.vue'
 import CanteenPage from '../views/canteenPage.vue'
 import UserPage from '../views/userPage.vue'
-import AddItems from '..//components/AddItems'
+import AddItems from '../components/AddItems'
 import SelectItems from '../components/SelectItems'
 import selectMenus from '../components/selectMenus'
 

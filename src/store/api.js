@@ -6,3 +6,4 @@ export default () => {
     // withCredentials: true
   })
 }
+<img src="../assets/aayulogic.png" style="width:30%; height:30%; float:left;"><br>
