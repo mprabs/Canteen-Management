@@ -1,5 +1,5 @@
 <template>
-<div class="jumbotron" id="menuList" >  <h1> AAYULOGIC CANTEEN MANAGEMENT </h1>
+<div id="menuList" >  <h1> AAYULOGIC CANTEEN MANAGEMENT </h1>
 
   <hr> <h3> Food Listings </h3> <hr>
   <!-- <pre>You can select only one of the items.</pre> -->
@@ -9,7 +9,7 @@
         <td>Id</td>
         <td>Name of items</td>
       </tr>
-      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer" @click:selected='true'>
+      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
           <td> {{ item.id }} </td>
           <td> {{ item.name }} </td>
       </tr>
@@ -18,16 +18,16 @@
   <div class="column">
     You selected :
     <div v-for="thing in selectedItems" :key="thing.id">
-        <table>
-          <tr>
-        <td><pre> {{ thing.id }} </pre> <br></td>
-        <td><pre> {{ thing.name }} </pre> <br></td>
-        <a @click="removeItem(thing.id)" style="cursor: pointer" ><td > Remove </td></a>
+        <table id="FoodMenu">
+        <tr style="cursor: pointer">
+          <td> {{ thing.id }} </td>
+          <td> {{ thing.name }} </td>
+          <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
           </tr>
         </table>
     </div>
   </div>
-        <router-link to="/SelectItems" tag="button"> Verify </router-link>
+  <router-link to="/SelectItems" tag="button"> Verify </router-link>
 </div>
 </template>
 

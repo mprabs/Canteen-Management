@@ -4,8 +4,8 @@
   <div class="header"><hr><h3 style="color: white;"> Menus</h3><hr></div>
   <div  class="column">
   Add Item:<br><br>
-  <form @submit="addEntry; loadItems;">
-    <input v-model="name" placeholder="Item name" v-on:keyup.enter="submit">
+  <form @submit="handleClick">
+    <input v-model="name" placeholder="Item name">
     <br><br>
     <button type="submit" class="btn btn-danger"> Add </button>
   </form>
@@ -15,18 +15,18 @@
     <!-- <button @click="showData">Show List</button> -->
     <table id="FoodMenu" >
     <thead>
-      <th>Id</th>
+      <!-- <th>Id</th> -->
       <th>Name of items</th>
       <th></th>
     </thead>
       <tr v-for="item in items" :key="item.id">
-        <td>
+        <!-- <td>
           {{ item.id }}
-        </td>
+        </td> -->
         <td>
           {{ item.name }}
         </td>
-        <td @click='removeElement(item.id)' style="cursor:pointer"> Remove </td>
+        <td @click='handleRemove(item.id)' style="cursor:pointer"> Remove </td>
         <!-- {{ item.id }} -->
       </tr>
   </table><br>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+// import func from '../../vue-temp/vue-editor-bridge'
 // import Axios from 'axios'
 // import { mapGetters } from 'vuex'
 // import api from '@/store/index.js'
@@ -52,13 +53,28 @@ export default {
       if (this.name === '') {
         alert('Enter something to add !')
       } else {
-        // console.log('Name', this.name)
+        console.log('add')
         this.$store.dispatch('addItem', this.name)
         this.name = ''
       }
     },
     removeElement: function (id) {
       this.$store.dispatch('removeItem', id)
+    },
+    loadItems: function () {
+      this.$store.dispatch('loadItems')
+    },
+    handleClick: function (name) {
+      this.addEntry(name)
+      this.loadItems()
+    },
+    handleRemove: function (id) {
+      // this.removeElement(id)
+      this.removeElement(id)
+      this.loadItems()
+    },
+    reload: function () {
+      window.history.go()
     }
     // showData: function () {
     //   this.$store.dispatch('loadItems')
@@ -70,10 +86,8 @@ export default {
       return this.$store.getters.items
     }
   },
-  mounted: {
-    loadItems: function () {
-      this.$store.dispatch('loadItems')
-    }
+  mounted: function () {
+    this.$store.dispatch('loadItems')
   }
   // mounted: Axios.get('http://fff07418.ngrok.io/myapp/fooditem/')
   //   .then(response =>
