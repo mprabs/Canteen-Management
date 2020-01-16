@@ -1,28 +1,25 @@
 <template>
-    <div id="secure">
-        <h1>Secure Area</h1>
+    <div id="adminPage">
+        <h1>ADMINPAGE</h1>
         <AddItems msg="AAYULOGIC CANTEEN MANAGEMENT  </h1>"/>
     </div>
 </template>
 
 <script>
 import AddItems from '../components/AddItems.vue'
-import UserService from '../services/user.service.js'
 
 export default {
-  name: 'Secure',
+  name: 'adminPage',
   components: {
     AddItems
   },
   data () {
-    return {}
+    return {
+    }
   },
   mounted () {
-    UserService.getAdminPage().then(
-      response => {
-        this.content = response.data
-      }
-    )
+    this.$axios.request({ url: 'http://66356871.ngrok.io/token-auth/', headers: { Authorization: localStorage.getItem('userdetails') } })
+    this.$emit('authenticated', true)
   }
 }
 </script>

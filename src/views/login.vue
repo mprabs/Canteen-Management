@@ -20,24 +20,28 @@ export default {
         password: ''
       },
       user: []
+      // role: []
     }
   },
   methods: {
     login () {
       this.$axios
-        .post('http://d4e31a25.ngrok.io/token-auth/', {
+        .post('http://66356871.ngrok.io/token-auth/', {
           username: this.input.username,
           password: this.input.password })
         .then(response => {
           if (response.data) {
-            this.user = response.data
-            localStorage.setItem('user', JSON.stringify(response.data))
+            this.user = response.data.token
+            localStorage.setItem('userdetails', JSON.stringify(response.data.token))
             this.$emit('authenticated', true)
-            this.$router.replace({ name: 'secure' })
+            // this.role = response.data.authorization
+            this.$router.replace({ name: 'canteen' })
           } else {
             alert('The username and / or password is incorrect')
           }
         })
+      // this.$axios.request({ url: 'http://66356871.ngrok.io/token-auth/', headers: { Authorization: 'sfdafasdf' } })
+      // add header in url
     }
   }
 }
