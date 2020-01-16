@@ -1,6 +1,5 @@
 <template>
     <div id="adminPage">
-        <h1>ADMINPAGE</h1>
         <AddItems msg="AAYULOGIC CANTEEN MANAGEMENT  </h1>"/>
     </div>
 </template>

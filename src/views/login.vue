@@ -23,8 +23,8 @@ export default {
         username: '',
         password: ''
       },
-      user: []
-      // role: []
+      user: [],
+      role: []
     }
   },
   methods: {
@@ -35,17 +35,25 @@ export default {
           password: this.input.password })
         .then(response => {
           if (response.data) {
+            console.log(response.data.user.username)
             this.user = response.data.token
+            this.role = response.data
             localStorage.setItem('userdetails', JSON.stringify(response.data.token))
             this.$emit('authenticated', true)
-            // this.role = response.data.authorization
-            this.$router.replace({ name: 'canteen' })
-          } else {
-            alert('The username and / or password is incorrect')
+            if (response.data.user.is_superuser === true) {
+              this.$router.replace({ name: 'admin' })
+            } else if (response.data.user.is_staff === true) {
+              this.$router.replace({ name: 'canteen' })
+            } else if (response.data.user.username) {
+              this.$router.replace({ name: 'user' })
+            }
+          // this.$axios.request({ url: 'http://66356871.ngrok.io/token-auth/', headers: { Authorization: 'sfdafasdf' } })
+          // add header in url
           }
         })
-      // this.$axios.request({ url: 'http://66356871.ngrok.io/token-auth/', headers: { Authorization: 'sfdafasdf' } })
-      // add header in url
+        .catch(e => {
+          alert('The username and / or password is incorrect')
+        })
     }
   }
 }
@@ -57,8 +65,6 @@ export default {
   border: 1px solid rgb(176, 199, 199);
   background-color: rgb(255, 255, 255);
   margin: auto;
-  /* margin-top: 0px; */
-  /* padding: 30px; */
 }
 
 #headLine {
@@ -69,18 +75,12 @@ export default {
   font-size: 20px
 }
 
-/* #container {
-  background-image: url('../assets/download.jpg');
-  background-repeat: no-repeat;
-} */
-
 input {
   width: 80%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  /* color: aqua */
-}
+  }
 
 button {
   background-color: #1655c2;
@@ -91,7 +91,6 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  /* font-family:  */
   margin: 4px 2px;
   cursor: pointer;
 }
