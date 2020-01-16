@@ -1,14 +1,16 @@
 <template>
-<div class="jumbotron" id="menuList" >  <h1> AAYULOGIC CANTEEN MANAGEMENT </h1>
-
+<div class="jumbotron" id="menuList" >
+  <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
   <hr> <h3> Available Menus </h3> <hr>
   <pre>You can select only one of the items.</pre>
   <div>
     <table id="FoodMenu" >
+      <thead>
       <tr>
-        <td>Id</td>
-        <td>Name of items</td>
+        <th>Id</th>
+        <th>Name of items</th>
       </tr>
+      </thead>
       <tr v-for="item in items" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
           <td> {{ item.id }} </td>
           <td> {{ item.name }} </td>
@@ -16,7 +18,7 @@
     </table>
   </div>
   <div v-for="thing in selectedItems" :key="thing.id">
-    <pre> You selected <h2> {{ thing.name }} </h2> </pre> <br>
+    <pre> You selected <h2> {{ thing.name }} </h2> </pre>
     <button @click="addModal(thing.name)"> Verify </button>
   </div>
 </div>
@@ -57,7 +59,8 @@ export default {
 #FoodMenu {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
+  margin: auto;
 }
 
 #FoodMenu th {
@@ -98,6 +101,8 @@ button {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+button:hover { background-color: #7c7575}
 
 .header {
   background-color: #404040;

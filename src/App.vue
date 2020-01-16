@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss">
 body {
-        background-color: #F0F0F0;
+        background-color: rgb(243, 239, 239);
     }
     h1 {
         padding: 0;

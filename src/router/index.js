@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginComponent from '../views/login.vue'
 import SecureComponent from '../views/secure.vue'
-import AddItems from '..//components/AddItems'
+import AddItems from '../components/AddItems'
 import SelectItems from '../components/SelectItems'
 import selectMenus from '../components/selectMenus'
 

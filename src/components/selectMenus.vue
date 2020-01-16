@@ -1,33 +1,40 @@
 <template>
-<div id="menuList" >  <h1> AAYULOGIC CANTEEN MANAGEMENT </h1>
-
-  <hr> <h3> Food Listings </h3> <hr>
+<div id="menuList" >
+  <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
+<hr> <h3> Food Listings </h3> <hr>
+  <router-link to="/SelectItems" tag="button"> Verify </router-link>
+    <hr style="visibility: hidden; ">
   <!-- <pre>You can select only one of the items.</pre> -->
   <div class="column">
     <table id="FoodMenu" >
+      <thead>
       <tr>
-        <td>Id</td>
-        <td>Name of items</td>
+        <th>Id</th>
+        <th>Items Available</th>
       </tr>
-      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
+      </thead>
+      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer" :class="{'highlight': (item.id == selectedItem)}">
           <td> {{ item.id }} </td>
           <td> {{ item.name }} </td>
       </tr>
     </table>
   </div>
   <div class="column">
-    You selected :
-    <div v-for="thing in selectedItems" :key="thing.id">
-        <table id="FoodMenu">
-        <tr style="cursor: pointer">
-          <td> {{ thing.id }} </td>
-          <td> {{ thing.name }} </td>
-          <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
-          </tr>
-        </table>
-    </div>
+    <table id="FoodMenu">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Items for Tomorrow</th>
+        <th></th>
+      </tr>
+    </thead>
+      <tr  v-for="thing in selectedItems" :key="thing.id" style="cursor: pointer">
+        <td> {{ thing.id }} </td>
+        <td> {{ thing.name }} </td>
+        <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
+      </tr>
+    </table>
   </div>
-  <router-link to="/SelectItems" tag="button"> Verify </router-link>
 </div>
 </template>
 
@@ -35,9 +42,15 @@
 
 export default {
   name: 'menuList',
+  data () {
+    return {
+      selectItem: []
+    }
+  },
   methods: {
     selectElement: function (item) {
       this.$store.dispatch('selectItem', item)
+      this.selectItem = item
     },
     removeItem: function (id) {
       this.$store.dispatch('deleteItem', id)
@@ -61,6 +74,8 @@ export default {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  height: 100px;
+  overflow-y: scroll;
 }
 
 #FoodMenu th {
@@ -102,7 +117,13 @@ button {
   cursor: pointer;
 }
 
+button:hover { background-color: #7c7575}
+
 .header {
   background-color: #404040;
+}
+
+.highlight {
+     background-color: red;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 <div id="menuList" >
   <!-- <h1>{{ msg }}</h1> -->
-  <div class="header"><hr><h3 style="color: white;"> Menus</h3><hr></div>
+  <div class="header"><hr><h2 style="color: #6486c0;"> Food Listings</h2><hr></div>
   <div  class="column">
   Add Item:<br><br>
   <form @submit="handleClick">
@@ -19,19 +19,20 @@
       <th>Name of items</th>
       <th></th>
     </thead>
-      <tr v-for="item in items" :key="item.id">
+      <tr v-for="item in items" :key="item.id" style="line-height: 18px; height: 8px;">
         <!-- <td>
           {{ item.id }}
         </td> -->
         <td>
           {{ item.name }}
         </td>
-        <td @click='handleRemove(item.id)' style="cursor:pointer"> Remove </td>
+        <td @click='handleRemove(item.id)' style="cursor:pointer; "> Remove </td>
         <!-- {{ item.id }} -->
       </tr>
+      <tr></tr>
   </table><br>
-  <router-link to="/selectMenus" tag="button" >Verify</router-link>
   </div>
+  <router-link to="/selectMenus" tag="button" style="align: center">Verify</router-link>
   <!-- <SelectItems :dataList="items"></SelectItems> -->
 </div>
 </template>
@@ -105,17 +106,20 @@ export default {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  height: 100px;
+  overflow: auto;
 }
 
 #FoodMenu th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #404040;
+  background-color:#2b4c86;;
   color: white;
 }
 #FoodMenu td, th {
   border: 1px solid #404040;
+  height: 8px;
   padding: 8px;
 }
 
@@ -126,6 +130,8 @@ input {
   box-sizing: border-box;
 }
 
+button:hover { background-color: #7c7575}
+
 #FoodMenu tr:nth-child(even){background-color: #f2f2f2;}
 
 #FoodMenu tr:hover {background-color: #ddd;}
@@ -134,6 +140,7 @@ input {
   float: left;
   width: 50%;
   padding: 10px;
+  font-size: 16px;
 }
 
 * {
@@ -141,9 +148,9 @@ input {
 
 }
 button {
-  background-color: #404040;
+  background-color: #2b4c86;
   border: none;
-  color: white;
+  color: #f7f7f7;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -153,12 +160,21 @@ button {
   cursor: pointer;
 }
 
-.header {
-  background-color: #404040;
-}
+// .header {
+//   background-color: #2b4c86;;
+// }
 
 #menuList {
   font-family: Georgia;
   font-size: 13px;
+}
+
+#FoodMenu td:empty {
+  border-left: 0;
+  border-right: 0;
+}
+
+#menuList {
+  border : 10px;
 }
 </style>

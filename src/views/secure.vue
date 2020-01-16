@@ -1,8 +1,9 @@
 <template>
-    <div id="secure">
-        <h1>AAYULOGIC CANTEEN MANAGEMENT</h1>
-        <AddItems />
-    </div>
+  <div id="secure">
+    <img src="../assets/aayulogic.png" style="width:20%; height:20%; float:left;"><br>
+    <h1 style="color: #6486c0;">AAYULOGIC CANTEEN MANAGEMENT</h1>
+    <AddItems />
+  </div>
 </template>
 
 <script>
