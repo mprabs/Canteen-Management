@@ -81,10 +81,10 @@ export default new Vuex.Store({
     },
     // loadItems ({ commit }) {
     loadItems: function ({ commit }) {
-      Axios.get('http://d4e31a25.ngrok.io/myapp/fooditem/').then(response => {
+      Axios.get('http://d4e31a25.ngrok.io/myapp/fooditem/').then(response =>
         commit('SAVE_ITEMS', response)
         // console.log('items yei ho', response)
-      })
+      )
     }
   },
   getters: {
