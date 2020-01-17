@@ -30,7 +30,7 @@ export default {
   methods: {
     login () {
       this.$axios
-        .post('http://66356871.ngrok.io/token-auth/', {
+        .post('http://28a51681.ngrok.io/token-auth/', {
           username: this.input.username,
           password: this.input.password })
         .then(response => {
@@ -39,7 +39,6 @@ export default {
             this.user = response.data.token
             this.role = response.data
             localStorage.setItem('userdetails', JSON.stringify(response.data.token))
-            this.$emit('authenticated', true)
             if (response.data.user.is_superuser === true) {
               this.$router.replace({ name: 'admin' })
             } else if (response.data.user.is_staff === true) {
@@ -47,8 +46,6 @@ export default {
             } else if (response.data.user.username) {
               this.$router.replace({ name: 'user' })
             }
-          // this.$axios.request({ url: 'http://66356871.ngrok.io/token-auth/', headers: { Authorization: 'sfdafasdf' } })
-          // add header in url
           }
         })
         .catch(e => {

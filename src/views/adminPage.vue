@@ -6,6 +6,7 @@
 
 <script>
 import AddItems from '../components/AddItems.vue'
+import { instance } from '../store/axiosheader.js'
 
 export default {
   name: 'adminPage',
@@ -17,10 +18,12 @@ export default {
     }
   },
   mounted () {
-    this.$axios.request({ url: 'http://66356871.ngrok.io/token-auth/', headers: { Authorization: localStorage.getItem('userdetails') } })
-    this.$emit('authenticated', true)
-  }
-}
+    instance.request('')
+    this.token = instance.request('') // request in api where you want axios header
+    if (this.token) {
+      this.$emit('authenticated', true)
+    }
+  } }
 </script>
 
 <style scoped>
