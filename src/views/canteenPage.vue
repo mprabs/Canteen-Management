@@ -12,7 +12,7 @@ export default {
   components:
      { selectMenu },
   mounted () {
-    this.token = instance // request in api where you want axios header
+    this.token = instance.request('') // request in api where you want axios header
     if (this.token) {
       this.$emit('authenticated', true)
     }

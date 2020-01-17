@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import api from './api.js'
-import Axios from 'axios'
+// import Axios from 'axios'
+import { instance } from './axiosheader.js'
 
 Vue.use(Vuex)
 
@@ -12,13 +13,10 @@ export default new Vuex.Store({
   },
   mutations: {
     complete_add: function (state, newName) {
-      Axios({
-        method: 'post',
-        url: 'http://28a51681.ngrok.io/myapp/fooditem',
-        data: {
-          name: newName.name
-        }
-      })
+      instance.post('http://28a51681.ngrok.io/myapp/fooditem/', {
+        name: newName.name
+      }
+      )
     },
     selectNew: function (state, newSelectitem) {
       // console.log('suru', state.selectItems[0])
@@ -35,12 +33,12 @@ export default new Vuex.Store({
 
       for (var i = 0; i < state.allItems.length; i++) {
         if (state.allItems[i].id === delIndex.id) {
-          Axios.delete('http://28a51681.ngrok.io/myapp/fooditem' + delIndex.id)
+          instance.delete('http://28a51681.ngrok.io/myapp/fooditem/' + delIndex.id)
         }
       }
     },
     deleteItems: function (state, delIndex) {
-      console.log('The id', delIndex)
+      console.log('The id', delIndex.id)
 
       for (var i = 0; i < state.selectItems.length; i++) {
         if (state.selectItems[i].id === delIndex.id) {
@@ -81,10 +79,11 @@ export default new Vuex.Store({
     },
     // loadItems ({ commit }) {
     loadItems: function ({ commit }) {
-      Axios.get('http://28a51681.ngrok.io/myapp/fooditem').then(response =>
-        commit('SAVE_ITEMS', response)
+      instance.get('http://28a51681.ngrok.io/myapp/fooditem/')
+        .then(response =>
+          commit('SAVE_ITEMS', response)
         // console.log('items yei ho', response)
-      )
+        )
     }
   },
   getters: {
