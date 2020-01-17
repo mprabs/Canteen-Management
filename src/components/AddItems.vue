@@ -1,6 +1,5 @@
 <template>
 <div id="menuList" >
-  <!-- <h1>{{ msg }}</h1> -->
   <div class="header"><hr><h2 style="color: #6486c0;"> Food Listings</h2><hr></div>
   <div  class="column">
   Add Item:<br><br>
@@ -12,36 +11,25 @@
   </div>
   <div  class="column">
     Item Lists for tomorrow : <br><br>
-    <!-- <button @click="showData">Show List</button> -->
     <table id="FoodMenu" >
-    <thead>
-      <!-- <th>Id</th> -->
-      <th>Name of items</th>
-      <th></th>
-    </thead>
+      <thead>
+        <th>Name of items</th>
+        <th></th>
+      </thead>
       <tr v-for="item in items" :key="item.id" style="line-height: 18px; height: 8px;">
-        <!-- <td>
-          {{ item.id }}
-        </td> -->
         <td>
           {{ item.name }}
         </td>
         <td @click='handleRemove(item.id)' style="cursor:pointer; "> Remove </td>
-        <!-- {{ item.id }} -->
       </tr>
       <tr></tr>
-  </table><br>
+    </table><br>
   </div>
   <router-link to="/selectMenus" tag="button" style="align: center">Verify</router-link>
-  <!-- <SelectItems :dataList="items"></SelectItems> -->
 </div>
 </template>
 
 <script>
-// import func from '../../vue-temp/vue-editor-bridge'
-// import Axios from 'axios'
-// import { mapGetters } from 'vuex'
-// import api from '@/store/index.js'
 export default {
   name: 'menuList',
   data () {
@@ -77,10 +65,6 @@ export default {
     reload: function () {
       window.history.go()
     }
-    // showData: function () {
-    //   this.$store.dispatch('loadItems')
-    // }
-
   },
   computed: {
     items: function () {
@@ -90,16 +74,10 @@ export default {
   mounted: function () {
     this.$store.dispatch('loadItems')
   }
-  // mounted: Axios.get('http://fff07418.ngrok.io/myapp/fooditem/')
-  //   .then(response =>
-  //     console.log(response)
-  //     // this.$store.dispatch('addItem', element.name)
-  //   )
 }
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
 #FoodMenu {
@@ -159,10 +137,6 @@ button {
   margin: 4px 2px;
   cursor: pointer;
 }
-
-// .header {
-//   background-color: #2b4c86;;
-// }
 
 #menuList {
   font-family: Georgia;
