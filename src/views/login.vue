@@ -41,10 +41,13 @@ export default {
             localStorage.setItem('userdetails', JSON.stringify(response.data.token))
             if (response.data.user.is_superuser === true) {
               this.$router.replace({ name: 'admin' })
+              localStorage.setItem('pageDetails', 'admin')
             } else if (response.data.user.is_staff === true) {
               this.$router.replace({ name: 'canteen' })
+              localStorage.setItem('pageDetails', 'canteen')
             } else if (response.data.user.username) {
               this.$router.replace({ name: 'user' })
+              localStorage.setItem('pageDetails', 'user')
             }
           }
         })
