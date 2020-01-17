@@ -13,7 +13,7 @@
         <th>Items Available</th>
       </tr>
       </thead>
-      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer" :class="{'highlight': (item.id == selectedItem)}">
+      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
           <td> {{ item.id }} </td>
           <td> {{ item.name }} </td>
       </tr>

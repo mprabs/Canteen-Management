@@ -39,16 +39,13 @@ export default {
       this.selectedItems.splice(1, 1)
     },
     addModal: function (name, id) {
-      alert('Your selected item is ' + name).then(() => {
-        console.log('Alert closed.')
-      })
+      alert('Your selected item is ' + name)
     }
   },
   computed: {
     items: function () {
       return this.$store.getters.selectedItems
     }
-
   }
 }
 </script>
