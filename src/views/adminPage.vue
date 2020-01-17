@@ -6,7 +6,7 @@
 
 <script>
 import AddItems from '../components/AddItems.vue'
-import { instance } from '../store/axiosheader.js'
+// import { instance } from '../store/axiosheader.js'
 
 export default {
   name: 'adminPage',
@@ -18,10 +18,11 @@ export default {
     }
   },
   mounted () {
-    instance.request('')
-    this.token = instance.request('') // request in api where you want axios header
-    if (this.token) {
+    // request in api where you want axios header
+    if (localStorage.getItem('userdetails')) {
       this.$emit('authenticated', true)
+    } else {
+      this.$router.replace({ name: 'login' })
     }
   } }
 </script>

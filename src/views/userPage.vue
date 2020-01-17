@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { instance } from '../store/axiosheader.js'
+// import { instance } from '../store/axiosheader.js'
 import selectItems from '../components/SelectItems'
 export default {
   name: 'user',
@@ -13,9 +13,10 @@ export default {
     selectItems
   },
   mounted () {
-    this.token = instance.request('') // request in api where you want axios header
-    if (this.token) {
+    if (localStorage.getItem('userdetails')) {
       this.$emit('authenticated', true)
+    } else {
+      this.$router.replace({ name: 'login' })
     }
   }
 }
