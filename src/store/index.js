@@ -13,7 +13,7 @@ export default new Vuex.Store({
   },
   mutations: {
     complete_add: function (state, newName) {
-      instance.post('http://28a51681.ngrok.io/myapp/fooditem/', {
+      instance.post('http://127.0.0.1:8000/myapp/fooditem/', {
         name: newName.name
       }
       )
@@ -33,7 +33,7 @@ export default new Vuex.Store({
 
       for (var i = 0; i < state.allItems.length; i++) {
         if (state.allItems[i].id === delIndex.id) {
-          instance.delete('http://28a51681.ngrok.io/myapp/fooditem/' + delIndex.id)
+          instance.delete('http://127.0.0.1:8000/myapp/fooditem/' + delIndex.id)
         }
       }
     },
@@ -79,7 +79,7 @@ export default new Vuex.Store({
     },
     // loadItems ({ commit }) {
     loadItems: function ({ commit }) {
-      instance.get('http://28a51681.ngrok.io/myapp/fooditem/')
+      instance.get('http://127.0.0.1:8000/myapp/fooditem/')
         .then(response =>
           commit('SAVE_ITEMS', response)
         // console.log('items yei ho', response)

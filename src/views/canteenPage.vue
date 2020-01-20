@@ -12,10 +12,6 @@ export default {
   components:
      { selectMenu },
   mounted () {
-    // this.token = instance.request('') // request in api where you want axios header
-    // if (this.token) {
-    //   this.$emit('authenticated', true)
-    // }
     if (localStorage.getItem('userdetails')) {
       this.$emit('authenticated', true)
     } else {

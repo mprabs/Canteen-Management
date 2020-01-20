@@ -30,7 +30,7 @@ export default {
   methods: {
     login () {
       this.$axios
-        .post('http://28a51681.ngrok.io/token-auth/', {
+        .post('http://127.0.0.1:8000/token-auth/', {
           username: this.input.username,
           password: this.input.password })
         .then(response => {
