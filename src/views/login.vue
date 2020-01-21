@@ -1,16 +1,14 @@
 <template>
   <div class="Login">
-    <!-- <span class="bg"></span> -->
-    <v-app id="inspire" >
+     <v-app id="inspire" >
       <v-content>
         <v-img
           src="../assets/canteen.jpg"
-          gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-          width="100%"
-          height=100%>
-       <v-container class="fill-height" >
-           <v-card max-width="65%">
-            <v-carousel hide-delimiter-background height="450">
+          gradient="to top right, rgba(255,255,255,.7), rgba(19,199,243,.33)"
+          height="100vh">
+       <v-container class="fill-height" fluid >
+           <v-card max-width="75%">
+            <v-carousel hide-delimiter-background height="450" >
               <v-carousel-item
                 src="../assets/canteen.jpg"
                 >
@@ -19,9 +17,9 @@
           </v-card>
 
           <v-spacer />
-          <v-card class="elevation-12" color="grey lighten-2" width="30%" height="350">
-              <v-toolbar color="grey lighten-2" class="blue--text text--darken-3" dark flat>
-                <!-- <v-toolbar-title>Canteen</v-toolbar-title> -->
+          <v-col cols="12" sm="8" md="3">
+          <v-card class="elevation-12" height="370">
+              <v-toolbar flat >
                 <v-spacer />
                 <v-img
                   src="../assets/aayulogic.png"
@@ -29,8 +27,9 @@
                   width="20"
                 ></v-img>
               </v-toolbar><hr color="blue" >
-              <v-card-text>
+              <v-card-text >
                 <v-form>
+                  <br>
                   <v-text-field
                     type="text"
                     v-model="input.username"
@@ -40,21 +39,21 @@
                     type="password"
                     v-model="input.password"
                     label="Password"
-                  />
+                  /><br>
                   <v-card-actions>
-                    <v-spacer /><v-btn
-                  tile
+                   <v-btn
+                  block
                   color="primary"
-                  dark
                   v-on:click="login()">Login</v-btn>
                   </v-card-actions>
                 </v-form>
             </v-card-text>
             </v-card>
+            </v-col>
        </v-container>
        </v-img>
        <v-footer :fixed="true" :padless="true">
-          <v-card flat tile width="100%" class="purple darken-4 text-center">
+          <v-card flat tile width="100%" class="blue lighten-2 text-center">
           <v-card-text class="white--text">
             {{ new Date().getFullYear() }} — <strong>Aayulogic</strong>
           </v-card-text>
