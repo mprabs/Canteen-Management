@@ -1,7 +1,5 @@
 <template>
 <div class="jumbotron" id="menuList" >
-  <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
-  <hr> <h3> Available Menus </h3> <hr>
   <pre>You can select only one of the items.</pre>
   <div>
     <table id="FoodMenu" >

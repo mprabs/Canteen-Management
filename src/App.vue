@@ -1,27 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link v-if="authenticated" to="/login" @click.native="logout()" replace>Logout</router-link>
-    </div>
-    <router-view @authenticated="setAuthenticated" />
+    <v-app>
+    <router-view />
+    <footerbar />
+    </v-app>
   </div>
 </template>
 
 <script>
+import footerbar from './components/footer.vue'
 export default {
   name: 'App',
-  data () {
-    return {
-      authenticated: false }
-  },
-  methods: {
-    setAuthenticated (status) {
-      this.authenticated = status
-    },
-    logout () {
-      this.authenticated = false
-      localStorage.clear()
-    }
+  components: {
+    footerbar
   }
 }
 </script>

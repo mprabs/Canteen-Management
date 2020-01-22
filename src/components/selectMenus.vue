@@ -1,7 +1,6 @@
 <template>
 <div id="menuList" >
   <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
-<hr> <h3> Food Listings </h3> <hr>
   <router-link to="/SelectItems" tag="button"> Verify </router-link>
     <hr style="visibility: hidden; ">
   <!-- <pre>You can select only one of the items.</pre> -->

@@ -1,23 +1,26 @@
 <template>
-  <div>
-      <selectMenu/>
-  </div>
+    <div id="homepage">
+          <Notificationbar />
+         </div>
 </template>
 
 <script>
+import Notificationbar from '../components/notificationbar.vue'
 // import { instance } from '../store/axiosheader.js'
-import selectMenu from '../components/selectMenus.vue'
+
 export default {
-  name: 'canteen',
-  components:
-     { selectMenu },
+  name: 'homepage',
+  components: {
+    Notificationbar
+  },
+  data () {
+    return {
+    }
+  },
   mounted () {
     if (localStorage.getItem('userdetails')) {
-      this.$emit('authenticated', true)
     } else {
       this.$router.replace({ name: 'login' })
     }
-  }
-}
-
+  } }
 </script>

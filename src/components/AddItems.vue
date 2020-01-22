@@ -1,7 +1,6 @@
 <template>
 <div id="menuList" >
-  <div class="header"><hr><h2 style="color: #6486c0;"> Food Listings</h2><hr></div>
-  <div  class="column">
+ <div  class="column">
   Add Item:<br><br>
   <form @submit="handleClick">
     <input v-model="name" placeholder="Item name">
