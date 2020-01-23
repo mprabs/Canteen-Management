@@ -18,7 +18,7 @@
                       </v-toolbar>
                       <hr color="blue" >
                       <v-card-text >
-                        <v-form>
+                        <v-form @submit="login()">
                           <br>
                           <v-text-field
                             type="text"
@@ -34,7 +34,7 @@
                           <v-btn
                           block
                           color="primary"
-                          v-on:click="login()">Login</v-btn>
+                          type="submit">Login</v-btn>
                           </v-card-actions>
                         </v-form>
                      </v-card-text>
