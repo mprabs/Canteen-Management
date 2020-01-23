@@ -1,7 +1,15 @@
 <template>
 <div id="menuList" >
+   Items Available
+  <!-- <br> {{ dateToday }} <br> -->
+  Items for the date of
+  <form @submit="throwDate">
+   <input type="date" name="dateSelect">
+   <input type="submit">
+  </form>
   <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
-  <router-link to="/SelectItems" tag="button"> Verify </router-link>
+  <router-link to="/SelectItems" tag="button" @click="pushItems"> Verify </router-link>
+  <button @click="window.history.go()">Add another</button>
     <hr style="visibility: hidden; ">
   <!-- <pre>You can select only one of the items.</pre> -->
   <div class="column">
@@ -9,7 +17,7 @@
       <thead>
       <tr>
         <th>Id</th>
-        <th>Items Available</th>
+        <th>Items Available </th>
       </tr>
       </thead>
       <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
@@ -27,43 +35,75 @@
         <th></th>
       </tr>
     </thead>
-      <tr  v-for="thing in selectedItems" :key="thing.id" style="cursor: pointer">
+      <tr  v-for="thing in selectItem" :key="thing.id" style="cursor: pointer">
         <td> {{ thing.id }} </td>
         <td> {{ thing.name }} </td>
         <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
       </tr>
     </table>
+    {{selectItem[0]}}
+    {{item}}
   </div>
 </div>
 </template>
 
 <script>
+// import func from '../../vue-temp/vue-editor-bridge'
 
 export default {
   name: 'menuList',
   data () {
     return {
-      selectItem: []
+      selectItem: [],
+      dateToday: '',
+      anyDate: ''
     }
   },
   methods: {
     selectElement: function (item) {
-      this.$store.dispatch('selectItem', item)
-      this.selectItem = item
+      console.log('value is', this.isExist)
+      if (this.isExist) {
+        this.selectItem.push(item)
+      } else alert('Already selected')
+    },
+    throwDate: function (date) {
+      this.anyDate = this.date
     },
     removeItem: function (id) {
-      this.$store.dispatch('deleteItem', id)
+      // this.$store.dispatch('deleteItem', id)
+      for (var i = 0; i < this.selectItem.length; i++) {
+        if (this.selectItem[i].id === id) {
+          this.selectItem.splice(i, 1)
+        }
+      }
+    },
+    isExist: function (item) {
+      for (var i = 0; i < this.selectItem.length; i++) {
+        if (this.selectItem[i] === item) {
+          return true
+        }
+      }
+      return false
+    },
+    pushItems: function () {
+      console.log('ani', this.anyDate)
+      this.$store.dispatch('selectItem', this.selectItem, this.anyDate)
     }
   },
   computed: {
     items: function () {
       return this.$store.getters.items
-    },
-    selectedItems: function () {
-      return this.$store.getters.selectedItems
     }
+    // selectedItems: function () {
+    //   return this.$store.getters.selectedItems
+    // }
+  },
+  mounted () {
+    this.dateToday = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
+    console.log('aaja', this.dateToday)
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,13 +1,5 @@
 <template>
 <div id="menuList" >
- <div  class="column">
-  Add Item:<br><br>
-  <form @submit="handleClick">
-    <input v-model="name" placeholder="Item name">
-    <br><br>
-    <button type="submit" class="btn btn-danger"> Add </button>
-  </form>
-  </div>
   <div  class="column">
     Item Lists for tomorrow : <br><br>
     <table id="FoodMenu" >
@@ -37,24 +29,11 @@ export default {
     }
   },
   methods: {
-    addEntry: function (name) {
-      if (this.name === '') {
-        alert('Enter something to add !')
-      } else {
-        console.log('add')
-        this.$store.dispatch('addItem', this.name)
-        this.name = ''
-      }
-    },
     removeElement: function (id) {
       this.$store.dispatch('removeItem', id)
     },
     loadItems: function () {
       this.$store.dispatch('loadItems')
-    },
-    handleClick: function (name) {
-      this.addEntry(name)
-      this.loadItems()
     },
     handleRemove: function (id) {
       // this.removeElement(id)
