@@ -1,6 +1,6 @@
 <template>
 <div id="menuList" >
-  <v-simple-table fixed-header height="300px">
+  <v-simple-table fixed-header height="350px">
     <template>
       <thead>
         <tr>
@@ -21,8 +21,8 @@
       </tbody>
     </template>
   </v-simple-table>
-<br>
-  <v-spacer/><v-btn block>Verify</v-btn>
+
+  <!-- <v-spacer/><v-btn @click='verify()' block>Verify</v-btn> -->
 </div>
 </template>
 
@@ -47,6 +47,9 @@ export default {
     },
     reload: function () {
       window.history.go()
+    },
+    verify () {
+      alert()
     }
   },
   computed: {
