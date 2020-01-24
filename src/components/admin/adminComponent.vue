@@ -1,8 +1,11 @@
 <template>
 <div id="homepage">
           <adminHome/>
+          <!-- if v-btn to home is pressed -->
           <adminMenu/>
+          <!-- if v-btn to menuList is pressed -->
           <adminViewOrder/>
+          <!-- if v-btn to vieworder is pressed -->
          </div>
 </template>
 

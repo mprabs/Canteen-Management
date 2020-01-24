@@ -12,11 +12,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
-          <td> {{ item.user }} </td>
-          <td> {{ item.order }} </td>
-          <td> {{ item.orderDate }} </td>
-      </tr>
       </tbody>
     </template>
   </v-simple-table>
@@ -32,7 +27,6 @@ export default {
   name: 'menuList',
   data: function () {
     return {
-      selectedItems: []
     }
   },
   methods: {
