@@ -42,12 +42,12 @@
       </tr>
       </thead>
       <tr v-for="item in items" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
-          <td> {{ item.id }} </td>
-          <td> {{ item.name }} </td>
+          <td> {{ item.date }} </td>
+          <td> {{ item.food_item }} </td>
       </tr>
     </table>
   </div>
-  <div v-for="thing in selectedItems" :key="thing.id">
+  <div v-for="thing in todaysmenu" :key="thing.id">
     <pre> You selected <h2> {{ thing.name }} </h2> </pre>
     <button @click="addModal(thing.name)"> Verify </button>
   </div>
@@ -60,22 +60,48 @@ export default {
   name: 'menuList',
   data: function () {
     return {
-      selectedItems: []
+      todaysmenu: [],
+      dateToday: ''
     }
   },
   methods: {
     selectElement: function (name, id) {
-      this.selectedItems.unshift({ name })
-      this.selectedItems.splice(1, 1)
+      this.todaysmenu.unshift({ name })
+      this.todaysmenu.splice(1, 1)
     },
     addModal: function (name, id) {
       alert('Your selected item is ' + name)
+    },
+    checkDate () {
+      var dates = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
+      this.dateToday = dates.parse('YYYY-MM-DD').toString('YYYY/MM/DD')
+      console.log(this.dateToday)
+      for (var i = 0; i < this.items.length; i++) {
+        console.log(this.items[i].date + ' ' + this.dateToday)
+        if (this.items[i].date === this.dateToday) {
+          console.log('datedekhayo', this.items[i].date)
+        }
+      }
+    },
+    foodList () {
+      // const intersection = this.items.filter(element => this.foodItems.id.includes(element))
+      // console.log('int', intersection)
     }
   },
   computed: {
     items: function () {
-      return this.$store.getters.selectedItems
+      return this.$store.getters.userItems
+    },
+    foodItems: function () {
+      return this.$store.getters.items
     }
+  },
+  mounted () {
+    this.$store.dispatch('loadItems')
+    this.$store.dispatch('loadSelectedItems')
+    // this.foodList()
+    this.checkDate()
+    // console.log(this.foodItems)
   }
 }
 </script>

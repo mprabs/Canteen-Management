@@ -9,7 +9,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     allItems: [],
-    selectItems: [],
     userItems: []
   },
   mutations: {
@@ -46,6 +45,7 @@ export default new Vuex.Store({
     },
     SAVE_ITEMS: function (state, response) {
       state.allItems = response.data
+      console.log('done')
     },
     USER_ITEMS: function (state, response) {
       state.userItems = response.data
@@ -84,6 +84,7 @@ export default new Vuex.Store({
         .then(response =>
           commit('SAVE_ITEMS', response)
         )
+      console.log('loaded')
     },
     loadSelectedItems: function ({ commit }) {
       instance.get('http://127.0.0.1:8000/myapp/menu/')
@@ -94,7 +95,6 @@ export default new Vuex.Store({
   },
   getters: {
     items: (state) => state.allItems,
-    selectedItems: (state) => state.selectItems,
     userItems: (state) => state.userItems
   }
 })

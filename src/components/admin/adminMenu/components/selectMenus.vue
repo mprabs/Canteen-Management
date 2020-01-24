@@ -1,6 +1,5 @@
 <template>
 <div id="menuList" >
-   Items Available
   Items for the date of
   <input type="date" v-model="dateSelect">
   <button @click="pushItems(dateSelect)"> Verify </button>
@@ -35,11 +34,19 @@
         <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
       </tr>
     </table>
+<<<<<<< HEAD:src/components/selectMenus.vue
+  </div>
+=======
    </div>
+>>>>>>> a94a622b2fec3acc9c9b4481f6b3ef4183586c96:src/components/admin/adminMenu/selectMenus.vue
 </div>
 </template>
 
 <script>
+<<<<<<< HEAD:src/components/selectMenus.vue
+
+=======
+>>>>>>> a94a622b2fec3acc9c9b4481f6b3ef4183586c96:src/components/admin/adminMenu/selectMenus.vue
 export default {
   name: 'menuList',
   data () {
@@ -95,9 +102,6 @@ export default {
   computed: {
     items: function () {
       return this.$store.getters.items
-    },
-    userItems: function () {
-      return this.$store.getters.userItems
     }
   },
   mounted () {
