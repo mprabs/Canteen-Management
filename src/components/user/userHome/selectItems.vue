@@ -32,6 +32,7 @@
 <hr>
 <hr>
 <hr>
+<h2>Items for the date of {{ dateToday }}</h2>
   <pre>You can select only one of the items.</pre>
   <div>
     <table id="FoodMenu" >
@@ -41,15 +42,15 @@
         <th>Name of items</th>
       </tr>
       </thead>
-      <tr v-for="item in items" :key="item.id" @click="selectElement(item.name)" style="cursor: pointer">
-          <td> {{ item.date }} </td>
-          <td> {{ item.food_item }} </td>
+      <tr v-for="item in todaysmenu" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
+          <td> {{ item.id }} </td>
+          <td> {{ item.name }} </td>
       </tr>
     </table>
   </div>
-  <div v-for="thing in todaysmenu" :key="thing.id">
+  <div v-for="thing in selectedItem" :key="thing.id">
     <pre> You selected <h2> {{ thing.name }} </h2> </pre>
-    <button @click="addModal(thing.name)"> Verify </button>
+    <button @click="addModal(thing)"> Verify </button>
   </div>
 </div>
 </template>
@@ -61,31 +62,42 @@ export default {
   data: function () {
     return {
       todaysmenu: [],
-      dateToday: ''
+      dateToday: '',
+      selectedItem: []
     }
   },
   methods: {
-    selectElement: function (name, id) {
-      this.todaysmenu.unshift({ name })
-      this.todaysmenu.splice(1, 1)
+    selectElement: function (name) {
+      this.selectedItem.unshift(name)
+      this.selectedItem.splice(1, 1)
     },
-    addModal: function (name, id) {
-      alert('Your selected item is ' + name)
+    addModal: function (name) {
+      alert('Your selected item is ' + name.name)
+      var userID = localStorage.getItem('userCredentials')
+      // console.log('username', userID, 'item', name.id)
+      var foodId = name.id
+      var dateEntry = this.dateToday
+      this.$store.dispatch('setOrder', {
+        orderUser: userID,
+        orderItem: foodId,
+        orderDate: dateEntry
+      })
     },
     checkDate () {
-      var dates = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
-      this.dateToday = dates.parse('YYYY-MM-DD').toString('YYYY/MM/DD')
-      console.log(this.dateToday)
+      this.dateToday = new Date().toJSON().slice(0, 10)
+      // console.log(this.dateToday)
       for (var i = 0; i < this.items.length; i++) {
-        console.log(this.items[i].date + ' ' + this.dateToday)
         if (this.items[i].date === this.dateToday) {
-          console.log('datedekhayo', this.items[i].date)
+          // console.log('yes')
+          for (var j = 0; j < this.items.length; j++) {
+            this.foodItems.forEach(element => {
+              if (this.items[i].food_item[j] === element.id) {
+                this.todaysmenu.push(element)
+              }
+            })
+          }
         }
       }
-    },
-    foodList () {
-      // const intersection = this.items.filter(element => this.foodItems.id.includes(element))
-      // console.log('int', intersection)
     }
   },
   computed: {
@@ -99,9 +111,7 @@ export default {
   mounted () {
     this.$store.dispatch('loadItems')
     this.$store.dispatch('loadSelectedItems')
-    // this.foodList()
     this.checkDate()
-    // console.log(this.foodItems)
   }
 }
 </script>

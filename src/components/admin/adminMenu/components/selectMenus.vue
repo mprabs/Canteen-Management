@@ -34,19 +34,11 @@
         <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
       </tr>
     </table>
-<<<<<<< HEAD:src/components/selectMenus.vue
   </div>
-=======
-   </div>
->>>>>>> a94a622b2fec3acc9c9b4481f6b3ef4183586c96:src/components/admin/adminMenu/selectMenus.vue
 </div>
 </template>
 
 <script>
-<<<<<<< HEAD:src/components/selectMenus.vue
-
-=======
->>>>>>> a94a622b2fec3acc9c9b4481f6b3ef4183586c96:src/components/admin/adminMenu/selectMenus.vue
 export default {
   name: 'menuList',
   data () {

@@ -75,6 +75,7 @@ export default {
               localStorage.setItem('pageDetails', 'Admin')
             } else if (response.data.user.username) {
               localStorage.setItem('pageDetails', 'User')
+              localStorage.setItem('userCredentials', response.data.user.id)
             }
           }
           this.$router.replace({ name: 'home' })
