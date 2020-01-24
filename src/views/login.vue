@@ -73,8 +73,6 @@ export default {
             localStorage.setItem('userdetails', JSON.stringify(response.data.token))
             if (response.data.user.is_superuser === true) {
               localStorage.setItem('pageDetails', 'Admin')
-            } else if (response.data.user.is_staff === true) {
-              localStorage.setItem('pageDetails', 'Canteen')
             } else if (response.data.user.username) {
               localStorage.setItem('pageDetails', 'User')
             }

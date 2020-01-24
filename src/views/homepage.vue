@@ -1,23 +1,30 @@
 <template>
     <div id="homepage">
-          <Notificationbar />
+          <Navigationbar/>
+          <adminComponent v-if="this.role === 'Admin'"/>
+          <userComponent v-if="this.role === 'User'"/>
          </div>
 </template>
 
 <script>
-import Notificationbar from '../components/notificationbar.vue'
-// import { instance } from '../store/axiosheader.js'
+import adminComponent from '../components/admin/adminComponent.vue'
+import userComponent from '../components/user/userComponent.vue'
+import Navigationbar from '../components/navigationbar.vue'
 
 export default {
   name: 'homepage',
   components: {
-    Notificationbar
+    adminComponent,
+    userComponent,
+    Navigationbar
   },
   data () {
     return {
+      role: []
     }
   },
   mounted () {
+    this.role = localStorage.getItem('pageDetails')
     if (localStorage.getItem('userdetails')) {
     } else {
       this.$router.replace({ name: 'login' })
