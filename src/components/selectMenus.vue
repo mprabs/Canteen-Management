@@ -3,13 +3,11 @@
    Items Available
   <!-- <br> {{ dateToday }} <br> -->
   Items for the date of
-  <form @submit="throwDate">
-   <input type="date" name="dateSelect">
-   <input type="submit">
-  </form>
+  <input type="date" v-model="dateSelect">
+  <!-- <button @click="throwDate(dateSelect)"></button> -->
   <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
-  <router-link to="/SelectItems" tag="button" @click="pushItems"> Verify </router-link>
-  <button @click="window.history.go()">Add another</button>
+  <button @click="pushItems(dateSelect)"> Verify </button>
+  <button @click="reload">Add another</button>
     <hr style="visibility: hidden; ">
   <!-- <pre>You can select only one of the items.</pre> -->
   <div class="column">
@@ -35,14 +33,13 @@
         <th></th>
       </tr>
     </thead>
-      <tr  v-for="thing in selectItem" :key="thing.id" style="cursor: pointer">
+      <tr  v-for="thing in displayarray" :key="thing.id" style="cursor: pointer">
         <td> {{ thing.id }} </td>
         <td> {{ thing.name }} </td>
         <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
       </tr>
     </table>
-    {{selectItem[0]}}
-    {{item}}
+    <!-- {{selectItem}} -->
   </div>
 </div>
 </template>
@@ -56,51 +53,59 @@ export default {
     return {
       selectItem: [],
       dateToday: '',
-      anyDate: ''
+      anyDate: '',
+      item: '',
+      displayarray: [],
+      dateSelect: ''
     }
   },
   methods: {
     selectElement: function (item) {
-      console.log('value is', this.isExist)
-      if (this.isExist) {
-        this.selectItem.push(item)
-      } else alert('Already selected')
+      var check = this.isExist(item.id)
+      if (check === 'exists') {
+        alert('Already selected !')
+      } else {
+        this.selectItem.push(item.id)
+        this.displayarray.push(item)
+      }
     },
     throwDate: function (date) {
       this.anyDate = this.date
+      console.log(date)
     },
     removeItem: function (id) {
-      // this.$store.dispatch('deleteItem', id)
-      for (var i = 0; i < this.selectItem.length; i++) {
-        if (this.selectItem[i].id === id) {
-          this.selectItem.splice(i, 1)
+      for (var i = 0; i < this.displayarray.length; i++) {
+        if (this.displayarray[i].id === id) {
+          this.displayarray.splice(i, 1)
         }
       }
     },
     isExist: function (item) {
       for (var i = 0; i < this.selectItem.length; i++) {
         if (this.selectItem[i] === item) {
-          return true
+          return 'exists'
         }
       }
-      return false
     },
-    pushItems: function () {
-      console.log('ani', this.anyDate)
-      this.$store.dispatch('selectItem', this.selectItem, this.anyDate)
+    pushItems: function (dateFor) {
+      console.log('date yei ho', dateFor)
+      this.$store.dispatch('selectItem', dateFor)
+    },
+    reload: function () {
+      window.history.go()
     }
   },
   computed: {
     items: function () {
       return this.$store.getters.items
+    },
+    userItems: function () {
+      return this.$store.getters.userItems
     }
-    // selectedItems: function () {
-    //   return this.$store.getters.selectedItems
-    // }
   },
   mounted () {
     this.dateToday = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
-    console.log('aaja', this.dateToday)
+    this.$store.dispatch('loadItems')
   }
 }
 
