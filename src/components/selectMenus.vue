@@ -1,15 +1,10 @@
 <template>
 <div id="menuList" >
-   Items Available
-  <!-- <br> {{ dateToday }} <br> -->
   Items for the date of
   <input type="date" v-model="dateSelect">
-  <!-- <button @click="throwDate(dateSelect)"></button> -->
-  <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
   <button @click="pushItems(dateSelect)"> Verify </button>
   <button @click="reload">Add another</button>
     <hr style="visibility: hidden; ">
-  <!-- <pre>You can select only one of the items.</pre> -->
   <div class="column">
     <table id="FoodMenu" >
       <thead>
@@ -39,13 +34,11 @@
         <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
       </tr>
     </table>
-    <!-- {{selectItem}} -->
   </div>
 </div>
 </template>
 
 <script>
-// import func from '../../vue-temp/vue-editor-bridge'
 
 export default {
   name: 'menuList',
@@ -102,9 +95,6 @@ export default {
   computed: {
     items: function () {
       return this.$store.getters.items
-    },
-    userItems: function () {
-      return this.$store.getters.userItems
     }
   },
   mounted () {
