@@ -1,15 +1,11 @@
 <template>
 <div id="menuList" >
    Items Available
-  <!-- <br> {{ dateToday }} <br> -->
   Items for the date of
   <input type="date" v-model="dateSelect">
-  <!-- <button @click="throwDate(dateSelect)"></button> -->
-  <!-- <h1> AAYULOGIC CANTEEN MANAGEMENT </h1> -->
   <button @click="pushItems(dateSelect)"> Verify </button>
   <button @click="reload">Add another</button>
     <hr style="visibility: hidden; ">
-  <!-- <pre>You can select only one of the items.</pre> -->
   <div class="column">
     <table id="FoodMenu" >
       <thead>
@@ -39,14 +35,11 @@
         <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
       </tr>
     </table>
-    <!-- {{selectItem}} -->
-  </div>
+   </div>
 </div>
 </template>
 
 <script>
-// import func from '../../vue-temp/vue-editor-bridge'
-
 export default {
   name: 'menuList',
   data () {
@@ -77,6 +70,7 @@ export default {
       for (var i = 0; i < this.displayarray.length; i++) {
         if (this.displayarray[i].id === id) {
           this.displayarray.splice(i, 1)
+          this.selectItem.splice(i, 1)
         }
       }
     },
@@ -88,8 +82,11 @@ export default {
       }
     },
     pushItems: function (dateFor) {
-      console.log('date yei ho', dateFor)
-      this.$store.dispatch('selectItem', dateFor)
+      var ItemsArray = this.selectItem
+      this.$store.dispatch('selectItem', {
+        newDate: dateFor,
+        newSelectItem: ItemsArray
+      })
     },
     reload: function () {
       window.history.go()

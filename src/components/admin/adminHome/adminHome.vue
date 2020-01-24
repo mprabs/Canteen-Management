@@ -13,7 +13,7 @@
                      </v-card-text>
                   </v-card>
                   </v-col>
-                  <v-col cols="12" sm="8" md="4">
+                  <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12" height="auto">
                       <v-toolbar flat >
                         <v-toolbar-title>FoodList</v-toolbar-title>
@@ -24,25 +24,14 @@
                      </v-card-text>
                   </v-card>
                   </v-col>
-                  <v-spacer /><v-col cols="12" sm="8" md="4">
-            <v-card class="elevation-12" height="450px">
-                      <v-toolbar flat >
-                        <v-toolbar-title>Menu</v-toolbar-title>
-                      </v-toolbar>
-                      <hr color="blue" >
-                      <v-card-text >
-                        <!-- <addItems /> -->
-                     </v-card-text>
-                  </v-card>
-                  </v-col>
-        </v-row>
+          </v-row>
       </v-container>
     </v-content>
 </template>
 
 <script>
-import addItems from './AddItems.vue'
-import newAdd from './newadd.vue'
+import addItems from './components/addItems.vue'
+import newAdd from './components/newAdd.vue'
 export default {
   data () {
     return {

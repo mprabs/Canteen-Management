@@ -1,22 +1,22 @@
 <template>
     <div id="homepage">
-          <Notificationbar/>
+          <Navigationbar/>
           <adminComponent v-if="this.role === 'Admin'"/>
           <userComponent v-if="this.role === 'User'"/>
          </div>
 </template>
 
 <script>
-import adminComponent from '../components/adminComponent.vue'
-import userComponent from '../components/userComponent.vue'
-import Notificationbar from '../components/notificationbar.vue'
+import adminComponent from '../components/admin/adminComponent.vue'
+import userComponent from '../components/user/userComponent.vue'
+import Navigationbar from '../components/navigationbar.vue'
 
 export default {
   name: 'homepage',
   components: {
     adminComponent,
     userComponent,
-    Notificationbar
+    Navigationbar
   },
   data () {
     return {
