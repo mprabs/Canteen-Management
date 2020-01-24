@@ -1,11 +1,18 @@
 <template>
     <div  class="column">
-  Add Item:<br><br>
-  <form @submit="handleClick">
-    <input v-model="name" placeholder="Item name">
-    <br><br>
-    <button type="submit" class="btn btn-danger"> Add </button>
-  </form>
+  <v-form @submit="handleClick">
+    <br><v-text-field
+      v-model="name"
+      label="What do you want to add?"
+      required
+    ></v-text-field>
+    <br><v-card-actions>
+      <v-btn
+        type="submit"
+        block
+        >Add</v-btn>
+        </v-card-actions>
+  </v-form>
   </div>
 </template>
 <script>
@@ -29,7 +36,7 @@ export default {
     },
     handleClick: function (name) {
       this.addEntry(name)
-    //   this.loadItems()
+      this.reload()
     },
     reload: function () {
       window.history.go()
