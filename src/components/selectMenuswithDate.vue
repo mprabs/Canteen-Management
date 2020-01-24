@@ -77,7 +77,6 @@ export default {
       for (var i = 0; i < this.displayarray.length; i++) {
         if (this.displayarray[i].id === id) {
           this.displayarray.splice(i, 1)
-          this.selectItem.splice(i, 1)
         }
       }
     },
@@ -89,11 +88,8 @@ export default {
       }
     },
     pushItems: function (dateFor) {
-      var ItemsArray = this.selectItem
-      this.$store.dispatch('selectItem', {
-        newDate: dateFor,
-        newSelectItem: ItemsArray
-      })
+      console.log('date yei ho', dateFor)
+      this.$store.dispatch('selectItem', dateFor)
     },
     reload: function () {
       window.history.go()

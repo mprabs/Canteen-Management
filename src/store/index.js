@@ -19,11 +19,11 @@ export default new Vuex.Store({
       }
       )
     },
-    selectNew: function (state, newSelectitem, newDate) {
-      console.log('suru', newSelectitem, 'date', newDate)
+    selectNew: function (state, selectNew) {
+      console.log('suru', selectNew.dateFor, selectNew.ItemsArray)
       instance.post('http://127.0.0.1:8000/myapp/menu/', {
-        food_item: newSelectitem.selectItem,
-        date: newDate.dateFor
+        date: selectNew.dateFor,
+        food_item: selectNew.ItemsArray
       })
     },
     deleteEntry: function (state, delIndex) {
@@ -65,12 +65,12 @@ export default new Vuex.Store({
       }
       commit('deleteEntry', delNew)
     },
-    selectItem: function ({ commit }, newDate) {
+    selectItem: function ({ commit }, { newDate, newSelectItem }) {
       var selectNew = {
-        // selectItem: newSelectitem,
-        dateFor: newDate
+        dateFor: newDate,
+        ItemsArray: newSelectItem
       }
-      console.log(newDate)
+      console.log('Check', newDate, newSelectItem)
       commit('selectNew', selectNew)
     },
     deleteItem: function ({ commit }, delIndex) {
@@ -79,19 +79,16 @@ export default new Vuex.Store({
       }
       commit('deleteItems', delNew)
     },
-    // loadItems ({ commit }) {
     loadItems: function ({ commit }) {
       instance.get('http://127.0.0.1:8000/myapp/fooditem/')
         .then(response =>
           commit('SAVE_ITEMS', response)
-        // console.log('items yei ho', response)
         )
     },
     loadSelectedItems: function ({ commit }) {
       instance.get('http://127.0.0.1:8000/myapp/menu/')
         .then(response =>
           commit('USER_ITEMS', response)
-        // console.log('items yei ho', response)
         )
     }
   },
