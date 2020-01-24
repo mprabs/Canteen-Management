@@ -17,7 +17,6 @@ export default {
   data () {
     return {
       role: []
-      // drawer: null
     }
   },
   mounted () {

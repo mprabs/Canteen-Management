@@ -1,5 +1,37 @@
 <template>
 <div class="jumbotron" id="menuList" >
+  <hr>
+<hr>
+<hr>
+<hr>
+ <hr>
+<hr>
+<hr>
+<hr>
+ <hr>
+<hr>
+<hr>
+<hr>
+ <hr>
+<hr>
+<hr>
+<hr>
+  <hr>
+<hr>
+<hr>
+<hr>
+ <hr>
+<hr>
+<hr>
+<hr>
+ <hr>
+<hr>
+<hr>
+<hr>
+ <hr>
+<hr>
+<hr>
+<hr>
   <pre>You can select only one of the items.</pre>
   <div>
     <table id="FoodMenu" >

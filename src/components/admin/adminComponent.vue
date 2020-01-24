@@ -12,16 +12,10 @@ import adminMenu from './adminMenu/adminMenu.vue'
 import adminViewOrder from './adminViewOrder/adminViewOrder.vue'
 export default {
   name: 'homepage',
-  data () {
-    return {
-    }
-  },
   components: {
     adminHome,
     adminMenu,
     adminViewOrder
-  },
-  mounted () {
   }
 }
 </script>
