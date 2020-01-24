@@ -2,51 +2,57 @@
 <div id="menuList" >
   Items for the date of
   <input type="date" v-model="dateSelect">
-  <button @click="pushItems(dateSelect)"> Verify </button>
-  <button @click="reload">Add another</button>
+  <v-btn tile depressed @click="reload">Add another</v-btn>
     <hr style="visibility: hidden; ">
-  <div class="column">
-    <table id="FoodMenu" >
+  <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="6">
+    <v-simple-table fixed-header height="250px">
+    <template>
       <thead>
-      <tr>
-        <th>Id</th>
-        <th>Items Available </th>
-      </tr>
+        <tr>
+          <th class="text-left">Items Available</th>
+        </tr>
       </thead>
-      <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
-          <td> {{ item.id }} </td>
-          <td> {{ item.name }} </td>
-      </tr>
-    </table>
-  </div>
-  <div class="column">
-    <table id="FoodMenu">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Items for Tomorrow</th>
-        <th></th>
-      </tr>
-    </thead>
-      <tr  v-for="thing in displayarray" :key="thing.id" style="cursor: pointer">
-        <td> {{ thing.id }} </td>
+      <tbody>
+        <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="line-height: 18px; height: 8px; cursor: pointer">
+        <td>
+          {{ item.name }}
+        </td>
+       </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
+  </v-col>
+  <v-spacer/><v-col cols="12" sm="8" md="6">
+<v-simple-table fixed-header height="250px">
+    <template>
+      <thead>
+        <tr>
+          <th class="text-left">Items for Tomorrow</th>
+          <th />
+        </tr>
+      </thead>
+      <tbody>
+        <tr  v-for="thing in displayarray" :key="thing.id" style="cursor: pointer">
         <td> {{ thing.name }} </td>
-        <td  @click="removeItem(thing.id)" style="cursor: pointer"> Remove </td>
+        <td @click="removeItem(thing.id)" style="cursor:pointer" class="text-right" >
+          <v-btn icon>
+                <v-icon color="red">mdi-close</v-icon>
+                </v-btn></td>
       </tr>
-    </table>
-<<<<<<< HEAD:src/components/selectMenus.vue
+      </tbody>
+    </template>
+  </v-simple-table>
+  </v-col>
+        </v-row>
+  </v-container>
+<v-btn block depressed @click="pushItems(dateSelect)"> Verify </v-btn>
+
   </div>
-=======
-   </div>
->>>>>>> a94a622b2fec3acc9c9b4481f6b3ef4183586c96:src/components/admin/adminMenu/selectMenus.vue
-</div>
 </template>
 
 <script>
-<<<<<<< HEAD:src/components/selectMenus.vue
-
-=======
->>>>>>> a94a622b2fec3acc9c9b4481f6b3ef4183586c96:src/components/admin/adminMenu/selectMenus.vue
 export default {
   name: 'menuList',
   data () {
@@ -111,64 +117,3 @@ export default {
 }
 
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-
-#FoodMenu {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  height: 100px;
-  overflow-y: scroll;
-}
-
-#FoodMenu th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #404040;
-  color: white;
-}
-#FoodMenu td, th {
-  border: 1px solid #404040;
-  padding: 8px;
-}
-
-#FoodMenu tr:nth-child(even){background-color: #f2f2f2;}
-
-#FoodMenu tr:hover {background-color: #ddd;}
-
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
-
-* {
-  box-sizing: border-box;
-
-}
-button {
-  background-color: #404040;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-button:hover { background-color: #7c7575}
-
-.header {
-  background-color: #404040;
-}
-
-.highlight {
-     background-color: red;
-}
-</style>

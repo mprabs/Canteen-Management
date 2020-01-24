@@ -1,9 +1,9 @@
 <template>
-    <div id="homepage">
+<div id="homepage">
           <Navigationbar/>
           <adminComponent v-if="this.role === 'Admin'"/>
           <userComponent v-if="this.role === 'User'"/>
-         </div>
+</div>
 </template>
 
 <script>
