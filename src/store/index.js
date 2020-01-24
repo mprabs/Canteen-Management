@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     allItems: [],
-    selectItems: []
+    selectItems: [],
+    userItems: []
   },
   mutations: {
     complete_add: function (state, newName) {
@@ -18,15 +19,12 @@ export default new Vuex.Store({
       }
       )
     },
-    selectNew: function (state, newSelectitem) {
-      // console.log('suru', state.selectItems[0])
-      for (var i = 0; i < state.selectItems.length; i++) {
-        if (state.selectItems[i].id === newSelectitem.item.id) {
-          console.log('paxi', state.selectItems[i].id, 'naam', newSelectitem.item.id)
-          state.selectItems.splice(i, 1)
-        }
-      }
-      state.selectItems.push({ name: newSelectitem.item.name, id: newSelectitem.item.id })
+    selectNew: function (state, selectNew) {
+      console.log('suru', selectNew.dateFor, selectNew.ItemsArray)
+      instance.post('http://127.0.0.1:8000/myapp/menu/', {
+        date: selectNew.dateFor,
+        food_item: selectNew.ItemsArray
+      })
     },
     deleteEntry: function (state, delIndex) {
       console.log('The id', delIndex)
@@ -48,6 +46,9 @@ export default new Vuex.Store({
     },
     SAVE_ITEMS: function (state, response) {
       state.allItems = response.data
+    },
+    USER_ITEMS: function (state, response) {
+      state.userItems = response.data
     }
   },
   actions: {
@@ -64,11 +65,12 @@ export default new Vuex.Store({
       }
       commit('deleteEntry', delNew)
     },
-    selectItem: function ({ commit }, newSelectitem) {
+    selectItem: function ({ commit }, { newDate, newSelectItem }) {
       var selectNew = {
-        item: newSelectitem
+        dateFor: newDate,
+        ItemsArray: newSelectItem
       }
-      // console.log(newSelectitem.name)
+      console.log('Check', newDate, newSelectItem)
       commit('selectNew', selectNew)
     },
     deleteItem: function ({ commit }, delIndex) {
@@ -77,17 +79,22 @@ export default new Vuex.Store({
       }
       commit('deleteItems', delNew)
     },
-    // loadItems ({ commit }) {
     loadItems: function ({ commit }) {
       instance.get('http://127.0.0.1:8000/myapp/fooditem/')
         .then(response =>
           commit('SAVE_ITEMS', response)
-        // console.log('items yei ho', response)
+        )
+    },
+    loadSelectedItems: function ({ commit }) {
+      instance.get('http://127.0.0.1:8000/myapp/menu/')
+        .then(response =>
+          commit('USER_ITEMS', response)
         )
     }
   },
   getters: {
     items: (state) => state.allItems,
-    selectedItems: (state) => state.selectItems
+    selectedItems: (state) => state.selectItems,
+    userItems: (state) => state.userItems
   }
 })
