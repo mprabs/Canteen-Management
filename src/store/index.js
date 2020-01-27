@@ -19,13 +19,6 @@ export default new Vuex.Store({
       }
       )
     },
-    selectNew: function (state, selectNew) {
-      // console.log('suru', selectNew.dateFor, selectNew.ItemsArray)
-      instance.post('http://127.0.0.1:8000/myapp/menu/', {
-        date: selectNew.dateFor,
-        food_item: selectNew.ItemsArray
-      })
-    },
     orderEntry: function (state, newOrder) {
       console.log('suru', newOrder.dateEntry, newOrder.userId, newOrder.foodId)
       instance.post('http://127.0.0.1:8000/myapp/order/', {
@@ -77,14 +70,6 @@ export default new Vuex.Store({
         id: delIndex
       }
       commit('deleteEntry', delNew)
-    },
-    selectItem: function ({ commit }, { newDate, newSelectItem }) {
-      var selectNew = {
-        dateFor: newDate,
-        ItemsArray: newSelectItem
-      }
-      // console.log('Check', newDate, newSelectItem)
-      commit('selectNew', selectNew)
     },
     setOrder: function ({ commit }, { orderUser, orderItem, orderDate }) {
       var newOrder = {
