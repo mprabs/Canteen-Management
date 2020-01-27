@@ -1,57 +1,41 @@
 <template>
 <div class="jumbotron" id="menuList" >
-  <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
-  <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
-<h2>Items for the date of {{ dateToday }}</h2>
-  <pre>You can select only one of the items.</pre>
-  <div>
-    <table id="FoodMenu" >
-      <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name of items</th>
-      </tr>
-      </thead>
-      <tr v-for="item in todaysmenu" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
-          <td> {{ item.id }} </td>
-          <td> {{ item.name }} </td>
-      </tr>
-    </table>
-  </div>
-  <div v-for="thing in selectedItem" :key="thing.id">
+ <v-content>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="12">
+            <v-card class="elevation-12" height="auto">
+                      <v-toolbar flat >
+                        <v-toolbar-title>Items for the date of {{ dateToday }}</v-toolbar-title>
+                      </v-toolbar>
+                      <hr color="blue" >
+                      <v-card-text >
+                            <v-simple-table fixed-header height="250px">
+                                <template>
+                                  <thead>
+                                    <tr>
+                                      <th>Id</th>
+                                    <th>Name of items</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="item in todaysmenu" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
+                                      <td> {{ item.id }} </td>
+                                      <td> {{ item.name }} </td>
+                                  </tr>
+                                  </tbody>
+                                </template>
+                              </v-simple-table>
+                     </v-card-text>
+                  </v-card>
+          </v-col>
+          </v-row>
+          <div v-for="thing in selectedItem" :key="thing.id">
     <pre> You selected <h2> {{ thing.name }} </h2> </pre>
-    <button @click="addModal(thing)"> Verify </button>
+    <v-btn @click="addModal(thing)" > Verify </v-btn>
   </div>
+      </v-container>
+    </v-content>
 </div>
 </template>
 
@@ -116,59 +100,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-
-#FoodMenu {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 50%;
-  margin: auto;
-}
-
-#FoodMenu th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #404040;
-  color: white;
-}
-#FoodMenu td, th {
-  border: 1px solid #404040;
-  padding: 8px;
-}
-
-#FoodMenu tr:nth-child(even){background-color: #f2f2f2;}
-
-#FoodMenu tr:hover {background-color: #ddd;}
-
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
-
-* {
-  box-sizing: border-box;
-
-}
-button {
-  background-color: #404040;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-button:hover { background-color: #7c7575}
-
-.header {
-  background-color: #404040;
-}
-</style>
