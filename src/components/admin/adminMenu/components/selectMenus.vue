@@ -2,7 +2,7 @@
 <div id="menuList" >
   Items for the date of
   <input type="date" v-model="dateSelect" v-on:input="checkItems(dateSelect)">
-  <v-btn tile depressed @click="reload">Add another</v-btn>
+  <!-- <v-btn tile depressed @click="reload">Add another</v-btn> -->
     <hr style="visibility: hidden; ">
   <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -130,18 +130,23 @@ export default {
           )
           this.displayarray.length = 0
           this.foodname(element.food_item)
+        } else {
+          this.displayarray.length = 0
+          this.selectItem.length = 0
         }
       })
     },
     foodname: function (arrayOfItems) {
       arrayOfItems.forEach(thing => {
         this.existingMenu.forEach(element => {
-          if (element.id === thing) {
-            this.items.forEach(item => {
-              if (element.id === item.id) {
-                this.displayarray.push(item)
-              }
-            })
+          for (var i = 0; i < element.food_item.length; i++) {
+            if (element.food_item[i] === thing) {
+              this.items.forEach(item => {
+                if (element.food_item[i] === item.id) {
+                  this.displayarray.push(item)
+                }
+              })
+            }
           }
         })
       })

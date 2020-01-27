@@ -66,6 +66,8 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getOrder')
+    this.$store.dispatch('loadItems')
+    this.$store.dispatch('loadSelectedItems')
     this.foodname()
   }
 }

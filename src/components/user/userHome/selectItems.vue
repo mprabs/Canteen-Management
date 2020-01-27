@@ -37,9 +37,10 @@
                       <hr color="blue" >
                       <v-card-text >
                         <div v-for="thing in selectedItem" :key="thing.id">
-                        <pre> You selected<h2> {{ thing.name }} </h2> </pre>
+                        <pre slot="text-align:center"><h1> {{ thing.name }} </h1> </pre>
                         <v-btn block depressed @click="addModal(thing)"> Verify </v-btn>
                         </div>
+                        <h3 style="color:red"> {{ msg }} </h3>
                      </v-card-text>
                   </v-card>
           </v-col>
@@ -57,7 +58,9 @@ export default {
     return {
       todaysmenu: [],
       dateToday: '',
-      selectedItem: []
+      selectedItem: [],
+      verifiedStatus: false,
+      msg: ''
     }
   },
   methods: {
@@ -66,16 +69,21 @@ export default {
       this.selectedItem.splice(1, 1)
     },
     addModal: function (name) {
-      alert('Your selected item is ' + name.name)
-      var userID = localStorage.getItem('userCredentials')
-      // console.log('username', userID, 'item', name.id)
-      var foodId = name.id
-      var dateEntry = this.dateToday
-      this.$store.dispatch('setOrder', {
-        orderUser: userID,
-        orderItem: foodId,
-        orderDate: dateEntry
-      })
+      if (this.verifiedStatus === false) {
+        alert('Your selected item is ' + name.name)
+        var userID = localStorage.getItem('userCredentials')
+        // console.log('username', userID, 'item', name.id)
+        var foodId = name.id
+        var dateEntry = this.dateToday
+        this.$store.dispatch('setOrder', {
+          orderUser: userID,
+          orderItem: foodId,
+          orderDate: dateEntry
+        })
+        this.verifiedStatus = true
+      } else {
+        this.msg = 'You have already added !'
+      }
     },
     checkDate () {
       this.dateToday = new Date().toJSON().slice(0, 10)
