@@ -49,7 +49,6 @@ export default new Vuex.Store({
     },
     deleteItems: function (state, delIndex) {
       // console.log('The id', delIndex.id)
-
       for (var i = 0; i < state.selectItems.length; i++) {
         if (state.selectItems[i].id === delIndex.id) {
           state.selectItems.splice(i, 1)

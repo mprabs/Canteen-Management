@@ -113,6 +113,7 @@ export default {
   mounted () {
     this.dateToday = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
     this.$store.dispatch('loadItems')
+    // this.items()
   }
 }
 

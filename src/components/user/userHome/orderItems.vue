@@ -1,37 +1,5 @@
 <template>
 <div class="jumbotron" id="menuList" >
-  <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
-  <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
- <hr>
-<hr>
-<hr>
-<hr>
 <h2>Items for the date of {{ dateToday }}</h2>
   <pre>You can select only one of the items.</pre>
   <div>
