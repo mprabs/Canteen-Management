@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     allItems: [],
-    userItems: []
+    userItems: [],
+    order: []
   },
   mutations: {
     complete_add: function (state, newName) {
@@ -32,11 +33,6 @@ export default new Vuex.Store({
         'menu_item': newOrder.foodId,
         'user': newOrder.userId
       })
-      console.log({
-        'date': newOrder.dateEntry,
-        'menu_item': newOrder.foodId,
-        'user': newOrder.userId
-      })
     },
     deleteEntry: function (state, delIndex) {
       // console.log('The id', delIndex)
@@ -55,12 +51,17 @@ export default new Vuex.Store({
         }
       }
     },
+    deleteOrder: function (state, doneItem) {
+      // console.log('The id', delIndex.id)
+    },
     SAVE_ITEMS: function (state, response) {
       state.allItems = response.data
-      // console.log('done')
     },
     USER_ITEMS: function (state, response) {
       state.userItems = response.data
+    },
+    ORDER: function (state, response) {
+      state.order = response.data
     }
   },
   actions: {
@@ -112,10 +113,23 @@ export default new Vuex.Store({
         .then(response =>
           commit('USER_ITEMS', response)
         )
+    },
+    getOrder: function ({ commit }) {
+      instance.get('http://127.0.0.1:8000/myapp/order/')
+        .then(response =>
+          // console.log('data', response))
+          commit('ORDER', response))
+    },
+    doneOrder: function ({ commit }, doneItem) {
+      var doneOrder = {
+        item: doneItem
+      }
+      commit('deleteOrder', doneOrder)
     }
   },
   getters: {
     items: (state) => state.allItems,
-    userItems: (state) => state.userItems
+    userItems: (state) => state.userItems,
+    order: (state) => state.order
   }
 })

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginComponent from '../views/login.vue'
 import Homepage from '../views/homepage.vue'
+import OrderItems from '../components/user/userHome/orderItems'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Homepage
+    },
+    {
+      path: '/orderItems',
+      name: 'orderItems',
+      component: OrderItems
     }
   ]
 })

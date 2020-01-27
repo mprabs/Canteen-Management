@@ -12,6 +12,12 @@
         </tr>
       </thead>
       <tbody>
+        <tr v-for="item in orderList" :key="item.index">
+          <td>{{ item.user }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.name }}</td>
+          <!-- <td @click="remove(item)">Remove</td> -->
+        </tr>
       </tbody>
     </template>
   </v-simple-table>
@@ -27,11 +33,40 @@ export default {
   name: 'menuList',
   data: function () {
     return {
+      orderList: []
     }
   },
   methods: {
+    foodname: function () {
+      this.order.forEach(thing => {
+        this.foodItems.forEach(element => {
+          if (element.id === thing.menu_item) {
+            this.orderList.push({
+              date: thing.date,
+              user: thing.user,
+              name: element.name
+            })
+          }
+        })
+      })
+    },
+    remove: function (item) {
+      var index = this.orderList.indexOf(item)
+      this.orderList.splice(index, 1)
+      this.$store.dispatch('doneOrder', item)
+    }
   },
   computed: {
+    order () {
+      return this.$store.getters.order
+    },
+    foodItems: function () {
+      return this.$store.getters.items
+    }
+  },
+  mounted () {
+    this.$store.dispatch('getOrder')
+    this.foodname()
   }
 }
 </script>

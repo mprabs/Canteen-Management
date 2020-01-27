@@ -1,13 +1,14 @@
 <template>
 <div class="jumbotron" id="menuList" >
-<h2>Items for the date of {{ dateToday }}</h2>
-  <pre>You can select only one of the items.</pre>
+<!-- <h2>Items for the date of {{ dateToday }}</h2> -->
+  <pre>Orders </pre>
   <div>
     <table id="FoodMenu" >
       <thead>
       <tr>
-        <th>Id</th>
-        <th>Name of items</th>
+        <th>Order By</th>
+        <th>Name of item</th>
+        <th>Order date</th>
       </tr>
       </thead>
       <tr v-for="item in todaysmenu" :key="item.id" @click="selectElement(item)" style="cursor: pointer">
