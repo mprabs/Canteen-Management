@@ -65,7 +65,8 @@ export default {
       displayarray: [],
       dateSelect: '',
       idOfItem: '',
-      dateMatch: ''
+      dateMatch: '',
+      counter: ''
     }
   },
   methods: {
@@ -75,7 +76,9 @@ export default {
         alert('Already selected !')
       } else {
         this.selectItem.push(item.id)
+        // console.log('selectitem', this.selectItem)
         this.displayarray.push(item)
+        // console.log('selectitem', item)
       }
     },
     throwDate: function (date) {
@@ -120,33 +123,33 @@ export default {
       }
     },
     checkItems: function (dateSelected) {
+      this.counter = 'doesntExist'
       this.existingMenu.forEach(element => {
         if (element.date === dateSelected) {
-          this.selectItem.length = 0
+          this.selectItem.splice(0, this.selectItem.length)
+          this.displayarray.splice(0, this.displayarray.length)
           element.food_item.forEach(item =>
             this.selectItem.push(
               item
             )
           )
-          this.displayarray.length = 0
+          this.counter = 'dateExists'
+          // console.log('counter', this.counter)
           this.foodname(element.food_item)
-        } else {
-          this.displayarray.length = 0
-          this.selectItem.length = 0
         }
       })
+      if (this.counter !== 'dateExists') {
+        this.selectItem.splice(0, this.selectItem.length)
+        this.displayarray.splice(0, this.displayarray.length)
+      }
     },
     foodname: function (arrayOfItems) {
       arrayOfItems.forEach(thing => {
-        this.existingMenu.forEach(element => {
-          for (var i = 0; i < element.food_item.length; i++) {
-            if (element.food_item[i] === thing) {
-              this.items.forEach(item => {
-                if (element.food_item[i] === item.id) {
-                  this.displayarray.push(item)
-                }
-              })
-            }
+        this.items.forEach(item => {
+          if (thing === item.id) {
+            // console.log('yo', item.name, item.id)
+            this.displayarray.push(item)
+            // console.log('displayarray', item)
           }
         })
       })
