@@ -1,16 +1,16 @@
 <template>
-<div class="jumbotron" id="menuList" >
+<div id="menuList" >
  <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="12">
+          <v-col cols="12" sm="8" md="9">
             <v-card class="elevation-12" height="auto">
                       <v-toolbar flat >
                         <v-toolbar-title>Items for the date of {{ dateToday }}</v-toolbar-title>
                       </v-toolbar>
                       <hr color="blue" >
                       <v-card-text >
-                            <v-simple-table fixed-header height="250px">
+                            <v-simple-table fixed-header height="350px">
                                 <template>
                                   <thead>
                                     <tr>
@@ -29,11 +29,21 @@
                      </v-card-text>
                   </v-card>
           </v-col>
+          <v-col cols="12" sm="8" md="3">
+                  <v-card class="elevation-12" height="450px">
+                      <v-toolbar flat >
+                        <v-toolbar-title>Your Ordered Item</v-toolbar-title>
+                      </v-toolbar>
+                      <hr color="blue" >
+                      <v-card-text >
+                        <div v-for="thing in selectedItem" :key="thing.id">
+                        <pre> You selected<h2> {{ thing.name }} </h2> </pre>
+                        <v-btn block depressed @click="addModal(thing)"> Verify </v-btn>
+                        </div>
+                     </v-card-text>
+                  </v-card>
+          </v-col>
           </v-row>
-          <div v-for="thing in selectedItem" :key="thing.id">
-    <pre> You selected <h2> {{ thing.name }} </h2> </pre>
-    <v-btn @click="addModal(thing)" > Verify </v-btn>
-  </div>
       </v-container>
     </v-content>
 </div>
