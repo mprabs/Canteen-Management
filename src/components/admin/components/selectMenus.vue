@@ -29,7 +29,7 @@
     <template>
       <thead>
         <tr>
-          <th class="text-left">Items for Tomorrow</th>
+          <th class="text-left">Items for Selected Day </th>
           <th />
         </tr>
       </thead>

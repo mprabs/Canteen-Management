@@ -68,6 +68,7 @@ export default {
       this.selectedItem.splice(1, 1)
     },
     addModal: function (name) {
+      this.checkOrder()
       if (this.verifiedStatus === false) {
         alert('Your selected item is ' + name.name)
         var userID = localStorage.getItem('userCredentials')
@@ -80,14 +81,17 @@ export default {
         })
         this.verifiedStatus = true
       } else {
-        this.msg = 'You have already added !'
+        this.msg = 'An item is already registered in your name for the date'
       }
     },
-    // checkOrder () {
-    //   this.order.forEach(element => {
-    //     if(element.id === )
-    //   });
-    // },
+    checkOrder () {
+      this.order.forEach(element => {
+        // eslint-disable-next-line eqeqeq
+        if (element.date === this.dateToday && element.user == localStorage.getItem('userCredentials')) {
+          this.verifiedStatus = true
+        }
+      })
+    },
     checkDate () {
       this.dateToday = new Date().toJSON().slice(0, 10)
       for (var i = 0; i < this.items.length; i++) {
@@ -116,11 +120,10 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadItems')
+    this.$store.dispatch('getOrder')
     this.$store.dispatch('loadSelectedItems')
     this.checkDate()
-    this.$nextTick()
-    console.log(this.items)
-    console.log('todaysmenu', this.todaysmenu)
+    // this.$nextTick()
     if (localStorage.getItem('userdetails')) {
     } else {
       this.$router.replace({ name: 'login' })
