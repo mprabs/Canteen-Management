@@ -1,7 +1,7 @@
 <template>
 <div id="menuList" >
   Items for the date of
-  <input type="date" v-model="dateSelect" v-on:input="checkItems(dateSelect)">
+  <input type="date" v-model="dateSelect" v-on:input="checkItems(dateSelect)" >
   <!-- <v-btn tile depressed @click="reload">Add another</v-btn> -->
     <hr style="visibility: hidden; ">
   <v-container class="fill-height" fluid>
