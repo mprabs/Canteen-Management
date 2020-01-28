@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { instance } from '/home/rohitshrestha/git/Canteen-Management/src/store/axiosheader.js'
+import { instance } from '/home/rohitshrestha/git/canteen/src/store/axiosheader.js'
 export default {
   name: 'menuList',
   data () {
