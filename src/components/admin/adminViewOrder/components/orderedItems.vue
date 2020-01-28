@@ -16,7 +16,6 @@
           <td>{{ item.user }}</td>
           <td>{{ item.date }}</td>
           <td>{{ item.name }}</td>
-          <!-- <td @click="remove(item)">Remove</td> -->
         </tr>
       </tbody>
     </template>
@@ -65,10 +64,13 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getOrder')
-    this.$store.dispatch('loadItems')
-    this.$store.dispatch('loadSelectedItems')
-    this.foodname()
+    Promise.all([
+      this.$store.dispatch('getOrder'),
+      this.$store.dispatch('loadItems'),
+      this.$store.dispatch('loadSelectedItems')
+    ]).finally(() => {
+      this.foodname()
+    })
   }
 }
 </script>

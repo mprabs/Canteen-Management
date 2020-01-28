@@ -121,6 +121,7 @@ export default {
           food_item: ItemsArray
         })
       }
+      alert('Verified!')
     },
     checkItems: function (dateSelected) {
       this.counter = 'doesntExist'
