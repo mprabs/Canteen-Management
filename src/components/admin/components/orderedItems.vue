@@ -64,13 +64,14 @@ export default {
     }
   },
   mounted () {
-    Promise.all([
-      this.$store.dispatch('getOrder'),
-      this.$store.dispatch('loadItems'),
-      this.$store.dispatch('loadSelectedItems')
-    ]).finally(() => {
-      this.foodname()
-    })
+    // Promise.all([
+    this.$store.dispatch('getOrder')
+    this.$store.dispatch('loadItems')
+    this.$store.dispatch('loadSelectedItems')
+    console.log(this.order)
+    // ]).finally(() => {
+    this.foodname()
+    // })
   }
 }
 </script>
