@@ -13,7 +13,7 @@
         <td>
           {{ item.name }}
         </td>
-        <td @click='handleRemove(item.id)' style="cursor:pointer" class="text-right" >
+        <td @click='handleRemove(item.id, index)' style="cursor:pointer" class="text-right" >
           <v-btn icon>
                 <v-icon color="red">mdi-close</v-icon>
                 </v-btn></td>
@@ -35,14 +35,14 @@ export default {
     }
   },
   methods: {
-    removeElement: function (id) {
+    removeElement: function (id, index) {
       this.$store.dispatch('removeItem', id)
     },
     loadItems: function () {
       this.$store.dispatch('loadItems')
     },
-    handleRemove: function (id) {
-      this.removeElement(id)
+    handleRemove: function (id, index) {
+      this.removeElement(id, index)
       this.loadItems()
     },
     reload: function () {
