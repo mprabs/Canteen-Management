@@ -51,7 +51,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'menuList',
   data: function () {
@@ -66,7 +65,7 @@ export default {
   methods: {
     selectElement: function (name) {
       this.selectedItem.unshift(name)
-      // this.selectedItem.splice(1, 1)
+      this.selectedItem.splice(1, 1)
     },
     addModal: function (name) {
       if (this.verifiedStatus === false) {
@@ -116,6 +115,10 @@ export default {
     this.$store.dispatch('loadSelectedItems')
     this.checkDate()
     console.log('todaysmenu', this.todaysmenu)
+    if (localStorage.getItem('userdetails')) {
+    } else {
+      this.$router.replace({ name: 'login' })
+    }
   }
 }
 </script>
