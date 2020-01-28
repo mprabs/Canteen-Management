@@ -40,6 +40,7 @@
                 <pre slot="text-align:center"><h1> {{ thing.name }} </h1> </pre>
                 <v-btn block depressed @click="addModal(thing)"> Verify </v-btn>
                 </div>
+                <h3 style="color:green"> {{ selectedMessage }} </h3>
                 <h3 style="color:red"> {{ msg }} </h3>
               </v-card-text>
           </v-card>
@@ -59,7 +60,8 @@ export default {
       dateToday: '',
       selectedItem: [],
       verifiedStatus: false,
-      msg: ''
+      msg: '',
+      selectedMessage: ''
     }
   },
   methods: {
@@ -80,6 +82,8 @@ export default {
           orderDate: dateEntry
         })
         this.verifiedStatus = true
+        this.msg = ''
+        this.selectedMessage = 'Verified Selection :' + name.name
       } else {
         this.msg = 'An item is already registered in your name for the date'
       }

@@ -45,7 +45,9 @@ export default new Vuex.Store({
       }
     },
     deleteOrder: function (state, doneItem) {
-      // console.log('The id', delIndex.id)
+      console.log('The id', doneItem.item)
+      instance.delete('http://127.0.0.1:8000/myapp/order/' + doneItem.item)
+      alert('Deleted Order !')
     },
     SAVE_ITEMS: function (state, response) {
       state.allItems = response.data
