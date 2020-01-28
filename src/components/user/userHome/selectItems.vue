@@ -66,7 +66,7 @@ export default {
   methods: {
     selectElement: function (name) {
       this.selectedItem.unshift(name)
-      this.selectedItem.splice(1, 1)
+      // this.selectedItem.splice(1, 1)
     },
     addModal: function (name) {
       if (this.verifiedStatus === false) {
@@ -87,12 +87,13 @@ export default {
     },
     checkDate () {
       this.dateToday = new Date().toJSON().slice(0, 10)
-      console.log(this.dateToday)
+      // console.log(this.dateToday)
       for (var i = 0; i < this.items.length; i++) {
         if (this.items[i].date === this.dateToday) {
-          console.log('yes')
-          for (var j = 0; j < this.items.length; j++) {
+          // console.log('yes', this.items[i].food_item.length)
+          for (var j = 0; j <= this.items[i].food_item.length; j++) {
             this.foodItems.forEach(element => {
+              // console.log(element)
               if (this.items[i].food_item[j] === element.id) {
                 this.todaysmenu.push(element)
               }
