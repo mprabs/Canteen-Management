@@ -51,7 +51,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'menuList',
   data: function () {
@@ -122,6 +121,10 @@ export default {
     this.$nextTick()
     console.log(this.items)
     console.log('todaysmenu', this.todaysmenu)
+    if (localStorage.getItem('userdetails')) {
+    } else {
+      this.$router.replace({ name: 'login' })
+    }
   }
 }
 </script>

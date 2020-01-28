@@ -1,4 +1,5 @@
-<template>
+<template><div>
+  <Navigationbar/>
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -27,9 +28,11 @@
           </v-row>
       </v-container>
     </v-content>
+          </div>
 </template>
 
 <script>
+import Navigationbar from '../navigationbar.vue'
 import addItems from './components/addItems.vue'
 import newAdd from './components/newAdd.vue'
 export default {
@@ -39,11 +42,16 @@ export default {
     }
   },
   components: {
+    Navigationbar,
     addItems,
     newAdd
   },
   mounted () {
     this.role = localStorage.getItem('pageDetails')
+    if (localStorage.getItem('userdetails')) {
+    } else {
+      this.$router.replace({ name: 'login' })
+    }
   }
 }
 </script>

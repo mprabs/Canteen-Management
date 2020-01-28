@@ -1,24 +1,22 @@
 <template>
-<div id="homepage">
-          <adminHome v-if="this.role === 'Admin'"/>
-          <userHome v-if="this.role === 'User'"/>
+<div>
+  <Navigationbar/>
+  <selectItems />
 </div>
 </template>
 
 <script>
-import adminHome from '../components/admin/home.vue'
-import userHome from '../components/user/home.vue'
-
+import Navigationbar from '../navigationbar.vue'
+import selectItems from './components/selectItems.vue'
 export default {
-  name: 'homepage',
   data () {
     return {
       role: []
     }
   },
   components: {
-    adminHome,
-    userHome
+    Navigationbar,
+    selectItems
   },
   mounted () {
     this.role = localStorage.getItem('pageDetails')
@@ -26,5 +24,6 @@ export default {
     } else {
       this.$router.replace({ name: 'login' })
     }
-  } }
+  }
+}
 </script>
