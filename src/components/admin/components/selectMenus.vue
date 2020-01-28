@@ -1,7 +1,7 @@
 <template>
 <div id="menuList" >
   Items for the date of
-  <input type="date" v-model="dateSelect" v-on:input="checkItems(dateSelect)" >
+  <input type="date" v-model="dateSelect" v-on:input="checkItems(dateSelect)">
   <!-- <v-btn tile depressed @click="reload">Add another</v-btn> -->
     <hr style="visibility: hidden; ">
   <v-container class="fill-height" fluid>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { instance } from '/home/prabin/Desktop/Canteen/src/store/axiosheader.js'
+import { instance } from '/home/rohitshrestha/git/canteen/src/store/axiosheader.js'
 export default {
   name: 'menuList',
   data () {
@@ -121,7 +121,6 @@ export default {
           food_item: ItemsArray
         })
       }
-      alert('Verified!')
     },
     checkItems: function (dateSelected) {
       this.counter = 'doesntExist'
@@ -173,4 +172,5 @@ export default {
     this.$store.dispatch('loadSelectedItems')
   }
 }
+
 </script>
