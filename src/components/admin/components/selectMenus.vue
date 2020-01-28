@@ -76,9 +76,7 @@ export default {
         alert('Already selected !')
       } else {
         this.selectItem.push(item.id)
-        // console.log('selectitem', this.selectItem)
         this.displayarray.push(item)
-        // console.log('selectitem', item)
       }
     },
     throwDate: function (date) {
@@ -134,7 +132,6 @@ export default {
             )
           )
           this.counter = 'dateExists'
-          // console.log('counter', this.counter)
           this.foodname(element.food_item)
         }
       })
@@ -147,9 +144,7 @@ export default {
       arrayOfItems.forEach(thing => {
         this.items.forEach(item => {
           if (thing === item.id) {
-            // console.log('yo', item.name, item.id)
             this.displayarray.push(item)
-            // console.log('displayarray', item)
           }
         })
       })

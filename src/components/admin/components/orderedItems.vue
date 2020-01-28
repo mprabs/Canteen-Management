@@ -12,10 +12,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in orderList" :key="item.index">
+        <tr v-for="item in orderList" :key="item.index" @click="showtd">
           <td>{{ item.user }}</td>
           <td>{{ item.date }}</td>
           <td>{{ item.name }}</td>
+          <td @click="handleRemove(item.id, index)" style="display:none; color: red;" id="removeRow"> Remove </td>
         </tr>
       </tbody>
     </template>
@@ -32,7 +33,8 @@ export default {
   name: 'menuList',
   data: function () {
     return {
-      orderList: []
+      orderList: [],
+      index: ''
     }
   },
   methods: {
@@ -41,6 +43,7 @@ export default {
         this.foodItems.forEach(element => {
           if (element.id === thing.menu_item) {
             this.orderList.push({
+              id: thing.id,
               date: thing.date,
               user: thing.user,
               name: element.name
@@ -49,10 +52,15 @@ export default {
         })
       })
     },
-    remove: function (item) {
-      var index = this.orderList.indexOf(item)
+    handleRemove: function (item, index) {
       this.orderList.splice(index, 1)
       this.$store.dispatch('doneOrder', item)
+    },
+    showtd: function () {
+      var x = document.getElementById('removeRow')
+      if (x.style.display === 'block') {
+        x.style.display = 'none'
+      } else x.style.display = 'block'
     }
   },
   computed: {
@@ -64,14 +72,11 @@ export default {
     }
   },
   mounted () {
-    // Promise.all([
     this.$store.dispatch('getOrder')
     this.$store.dispatch('loadItems')
     this.$store.dispatch('loadSelectedItems')
     console.log(this.order)
-    // ]).finally(() => {
     this.foodname()
-    // })
   }
 }
 </script>
