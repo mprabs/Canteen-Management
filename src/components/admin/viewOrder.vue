@@ -6,13 +6,7 @@
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="12">
             <v-card class="elevation-12" height="auto">
-                      <v-toolbar flat >
-                        <v-toolbar-title>OrderedItems</v-toolbar-title>
-                      </v-toolbar>
-                      <hr color="blue" >
-                      <v-card-text >
                         <orderedItems />
-                     </v-card-text>
                   </v-card>
           </v-col>
           </v-row>

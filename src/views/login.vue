@@ -6,13 +6,14 @@
           gradient="to top right, rgba(255,255,255,.7), rgba(19,199,243,.33)"
           height="100vh">
               <v-container class="fill-height" fluid >
-                  <v-spacer /><v-col cols="12" sm="8" md="3">
-                  <v-card class="elevation-12" height="370">
+                  <v-row align="center" justify="center">
+                    <v-col cols="12" sm="8" md="4">
+                  <v-card class="elevation-12" height="auto">
                       <v-toolbar flat >
                         <v-spacer />
                         <v-img
                           src="../assets/aayulogic.png"
-                          height="20"
+                          height="30"
                           width="20"
                         ></v-img>
                       </v-toolbar>
@@ -40,6 +41,7 @@
                      </v-card-text>
                   </v-card>
                   </v-col>
+                  </v-row>
               </v-container>
         </v-img>
       </v-content>
