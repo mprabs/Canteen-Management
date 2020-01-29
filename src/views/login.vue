@@ -6,7 +6,8 @@
           gradient="to top right, rgba(255,255,255,.7), rgba(19,199,243,.33)"
           height="100vh">
               <v-container class="fill-height" fluid >
-                  <v-spacer /><v-col cols="12" sm="8" md="3">
+                  <!-- <v-spacer /> -->
+                  <v-col cols="12" sm="8" md="3">
                   <v-card class="elevation-12" height="370">
                       <v-toolbar flat >
                         <v-spacer />

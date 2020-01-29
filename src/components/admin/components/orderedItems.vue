@@ -12,11 +12,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in orderList" :key="item.index" @click="showtd">
+        <tr v-for="item in orderList" :key="item.index">
           <td>{{ item.user }}</td>
           <td>{{ item.date }}</td>
           <td>{{ item.name }}</td>
-          <td @click="handleRemove(item.id, index)" style="display:none; color: red;" id="removeRow"> Remove </td>
+          <td @click="handleRemove(item)" style="color: red; cursor:pointer;" id="removeRow"> Remove </td>
         </tr>
       </tbody>
     </template>
@@ -52,16 +52,20 @@ export default {
         })
       })
     },
-    handleRemove: function (item, index) {
+    handleRemove: function (item) {
+      var index = this.orderList.indexOf(item)
+      console.log(index)
       this.orderList.splice(index, 1)
+      item = item.id
       this.$store.dispatch('doneOrder', item)
-    },
-    showtd: function () {
-      var x = document.getElementById('removeRow')
-      if (x.style.display === 'block') {
-        x.style.display = 'none'
-      } else x.style.display = 'block'
     }
+    // showtd: function () {
+    //   var x = document.getElementById('removeRow')
+    //   console.log(this.rowIndex)
+    //   if (x.style.display === 'block') {
+    //     x.style.display = 'none'
+    //   } else x.style.display = 'block'
+    // }
   },
   computed: {
     order () {

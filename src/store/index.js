@@ -33,6 +33,7 @@ export default new Vuex.Store({
       for (var i = 0; i < state.allItems.length; i++) {
         if (state.allItems[i].id === delIndex.id) {
           instance.delete('http://127.0.0.1:8000/myapp/fooditem/' + delIndex.id)
+          // alert('DELETED !')
         }
       }
     },
