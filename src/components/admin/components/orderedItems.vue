@@ -1,42 +1,47 @@
 <template>
-<div id="menuList" >
-  <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center"><v-col cols="12" sm="8" md="12">
-    <v-simple-table fixed-header height="350px">
-    <template>
-      <thead>
-        <tr>
-          <th >User</th>
-          <th >Order Date</th>
-          <th >Order</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in orderList" :key="item.index">
-          <td>{{ item.user }}</td>
-          <td>{{ item.date }}</td>
-          <td>{{ item.name }}</td>
-          <td @click="handleRemove(item)" style="color: red; cursor:pointer;" id="removeRow"> Remove </td>
-        </tr>
-      </tbody>
+  <div id="menuList" >
+    <v-card>
+    <v-card-title>OrderList
+        <v-spacer /><v-col md="3">
+          <v-text-field
+        v-model="search"
+        label="Search"
+        solo filled rounded hide-details dense clearable flat
+        prepend-inner-icon="mdi-magnify"
+      ></v-text-field>
+      </v-col>
+       </v-card-title>
+          <v-data-table
+            :headers="headers"
+            :items="orderList"
+            class="elevation-1"
+            :search="search"
+            fixed-header
+            height="300px"
+            >
+    <template v-slot:item.action="{ item }">
+      <v-icon small @click="handleRemove(item.id, index)" color="red darken-1">mdi-delete</v-icon>
     </template>
-  </v-simple-table>
-  </v-col>
-  </v-row>
-  </v-container>
-</div>
+  </v-data-table>
+  </v-card>
+  </div>
 </template>
 
 <script>
-
 export default {
-  name: 'menuList',
-  data: function () {
-    return {
-      orderList: [],
-      index: ''
-    }
-  },
+  data: () => ({
+    search: '',
+    headers: [
+      { text: 'user', value: 'user' },
+      {
+        text: 'Item Name',
+        value: 'name'
+      },
+      { text: 'date', value: 'date' },
+      { text: 'Actions', value: 'action', sortable: false }
+    ],
+    orderList: []
+  }),
   methods: {
     foodname: function () {
       this.order.forEach(thing => {
@@ -79,7 +84,6 @@ export default {
     this.$store.dispatch('getOrder')
     this.$store.dispatch('loadItems')
     this.$store.dispatch('loadSelectedItems')
-    console.log(this.order)
     this.foodname()
   }
 }

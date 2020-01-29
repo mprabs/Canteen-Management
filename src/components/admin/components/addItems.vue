@@ -1,39 +1,45 @@
 <template>
-<div id="menuList" >
-  <v-simple-table fixed-header height="350px">
-    <template>
-      <thead>
-        <tr>
-          <th class="text-left">Name of Items</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in items" :key="item.id" style="line-height: 18px; height: 8px;">
-        <td>
-          {{ item.name }}
-        </td>
-        <td @click='handleRemove(item.id)' style="cursor:pointer" class="text-right" >
-          <v-btn icon>
-                <v-icon color="red">mdi-close</v-icon>
-                </v-btn></td>
-      </tr>
-      </tbody>
+  <div id="menuList" >
+    <v-card>
+    <v-card-title>FoodList
+        <v-spacer /><v-col md="3">
+          <v-text-field
+        v-model="search"
+        label="Search"
+        solo filled rounded hide-details dense clearable flat
+        prepend-inner-icon="mdi-magnify"
+      ></v-text-field>
+      </v-col>
+       </v-card-title>
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            class="elevation-1"
+            :search="search"
+            fixed-header
+            height="300px"
+            >
+    <template v-slot:item.action="{ item }">
+      <v-icon small @click="handleRemove(item.id)" color="red darken-1">mdi-delete</v-icon>
     </template>
-  </v-simple-table>
-
-  <!-- <v-spacer/><v-btn @click='verify()' block>Verify</v-btn> -->
-</div>
+  </v-data-table>
+  </v-card>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'menuList',
-  data () {
-    return {
-      name
-    }
-  },
+  data: () => ({
+    search: '',
+    headers: [
+      {
+        text: 'Item Name',
+        align: 'left',
+        value: 'name'
+      },
+      { text: 'Actions', align: 'right', value: 'action', sortable: false }
+    ]
+  }),
   methods: {
     removeElement: function (id) {
       this.$store.dispatch('removeItem', id)
@@ -44,12 +50,6 @@ export default {
     handleRemove: function (id) {
       this.removeElement(id)
       this.loadItems()
-    },
-    reload: function () {
-      window.history.go()
-    },
-    verify () {
-      alert()
     }
   },
   computed: {
@@ -61,5 +61,4 @@ export default {
     this.$store.dispatch('loadItems')
   }
 }
-
 </script>
