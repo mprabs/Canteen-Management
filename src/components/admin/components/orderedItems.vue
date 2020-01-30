@@ -59,18 +59,10 @@ export default {
     },
     handleRemove: function (item) {
       var index = this.orderList.indexOf(item)
-      console.log(index)
       this.orderList.splice(index, 1)
       item = item.id
       this.$store.dispatch('doneOrder', item)
     }
-    // showtd: function () {
-    //   var x = document.getElementById('removeRow')
-    //   console.log(this.rowIndex)
-    //   if (x.style.display === 'block') {
-    //     x.style.display = 'none'
-    //   } else x.style.display = 'block'
-    // }
   },
   computed: {
     order () {

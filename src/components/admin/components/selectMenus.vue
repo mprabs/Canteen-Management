@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { instance } from '/home/rohitshrestha/git/canteen/src/store/axiosheader.js'
+import { instance } from '/home/prabin/Desktop/Canteen/src/store/axiosheader.js'
 export default {
   name: 'menuList',
   data () {
@@ -117,12 +117,8 @@ export default {
       this.anyDate = this.date
     },
     removeItem: function (id) {
-      for (var i = 0; i < this.displayarray.length; i++) {
-        if (this.displayarray[i].id === id) {
-          this.displayarray.splice(i, 1)
-          this.selectItem.splice(i, 1)
-        }
-      }
+      this.displayarray = this.displayarray.filter(item => item.id !== id)
+      this.selectItem = this.selectItem.filter(item => item !== id)
     },
     isExist: function (item) {
       for (var i = 0; i < this.selectItem.length; i++) {
@@ -153,11 +149,7 @@ export default {
           food_item: ItemsArray
         })
       }
-<<<<<<< HEAD
       alert('Verified!')
-      this.reload()
-=======
->>>>>>> a6a66016d6eae335d154d6315c63864988e4d9a6
     },
     checkItems: function (dateSelected) {
       // console.log(dateSelected)
