@@ -1,6 +1,15 @@
 <template>
   <div id="menuList" >
-    <v-card>
+    <v-snackbar
+          v-model="snackbar"
+          right
+          :timeout="2000"
+          color="green"
+          top
+          >Deleted Item
+      <v-icon dark @click="snackbar = false" >mdi-close</v-icon>
+      </v-snackbar>
+      <v-card>
     <v-card-title>FoodList
         <v-spacer /><v-col md="3">
           <v-text-field
@@ -20,7 +29,7 @@
             height="300px"
             >
     <template v-slot:item.action="{ item }">
-      <v-icon small @click="handleRemove(item.id)" color="red darken-1">mdi-delete</v-icon>
+      <v-icon small @click="handleRemove(item.id)" >mdi-delete</v-icon>
     </template>
   </v-data-table>
   </v-card>
@@ -30,6 +39,7 @@
 <script>
 export default {
   data: () => ({
+    snackbar: false,
     search: '',
     headers: [
       {
@@ -50,6 +60,7 @@ export default {
     handleRemove: function (id) {
       this.removeElement(id)
       this.loadItems()
+      this.snackbar = true
     }
   },
   computed: {

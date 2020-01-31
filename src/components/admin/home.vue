@@ -6,9 +6,8 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12" height="450px">
                       <v-toolbar flat >
-                        <v-toolbar-title>Add New</v-toolbar-title>
+                        <v-toolbar-title >Add New</v-toolbar-title>
                       </v-toolbar>
-                      <hr color="blue" >
                       <v-card-text >
                         <newAdd />
                      </v-card-text>

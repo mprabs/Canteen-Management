@@ -20,7 +20,7 @@
             height="300px"
             >
     <template v-slot:item.action="{ item }">
-      <v-icon small @click="handleRemove(item.id, index)" color="red darken-1">mdi-delete</v-icon>
+      <v-icon small @click="handleRemove(item.id, index)" >mdi-delete</v-icon>
     </template>
   </v-data-table>
   </v-card>

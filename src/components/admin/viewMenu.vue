@@ -2,17 +2,11 @@
 <div>
   <Navigationbar/>
     <v-content>
-      <v-container class="fill-height" fluid>
+      <v-container class="fill-height" fluid >
         <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="12">
+          <v-col cols="12" sm="8" md="12" >
             <v-card class="elevation-12" height="auto">
-                      <v-toolbar flat >
-                        <v-toolbar-title>SelectMenu</v-toolbar-title>
-                      </v-toolbar>
-                      <hr color="blue" >
-                      <v-card-text >
-                        <selectMenus />
-                     </v-card-text>
+                     <selectMenus />
                   </v-card>
           </v-col>
           </v-row>

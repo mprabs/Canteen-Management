@@ -1,6 +1,6 @@
 <template>
     <div  class="column">
-  <v-form @submit="handleClick">
+  <v-form @submit="addEntry">
     <br><v-text-field
       v-model="name"
       label="What do you want to add?"
@@ -12,6 +12,15 @@
         block
         >Add</v-btn>
         </v-card-actions>
+        <v-snackbar
+          v-model="snackbar"
+          right
+          :timeout="2000"
+          :color='color'
+          top
+          >{{ text }}
+      <v-icon dark @click="snackbar = false" >mdi-close</v-icon>
+      </v-snackbar>
   </v-form>
   </div>
 </template>
@@ -21,25 +30,25 @@ export default {
   name: 'column',
   data () {
     return {
-      name
+      name,
+      snackbar: false,
+      text: [],
+      color: ''
     }
   },
   methods: {
     addEntry: function (name) {
       if (this.name === '') {
-        alert('Enter something to add !')
+        this.snackbar = true
+        this.text = 'Enter something to add'
+        this.color = 'red'
       } else {
-        console.log('add')
         this.$store.dispatch('addItem', this.name)
         this.name = ''
+        this.snackbar = true
+        this.text = 'Item added'
+        this.color = 'blue'
       }
-    },
-    handleClick: function (name) {
-      this.addEntry(name)
-      this.reload()
-    },
-    reload: function () {
-      window.history.go()
     }
   }
 }

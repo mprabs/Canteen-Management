@@ -6,15 +6,9 @@
           gradient="to top right, rgba(255,255,255,.7), rgba(19,199,243,.33)"
           height="100vh">
               <v-container class="fill-height" fluid >
-<<<<<<< HEAD
-                  <!-- <v-spacer /> -->
-                  <v-col cols="12" sm="8" md="3">
-                  <v-card class="elevation-12" height="370">
-=======
                   <v-row align="center" justify="center">
                     <v-col cols="12" sm="8" md="4">
                   <v-card class="elevation-12" height="auto">
->>>>>>> a6a66016d6eae335d154d6315c63864988e4d9a6
                       <v-toolbar flat >
                         <v-spacer />
                         <v-img
@@ -50,6 +44,15 @@
                   </v-row>
               </v-container>
         </v-img>
+        <v-snackbar
+          v-model="snackbar"
+          right
+          :timeout="2000"
+          color="red lighten-1"
+          top
+          >The username and/or password is incorrect
+      <v-icon dark @click="snackbar = false" >mdi-close</v-icon>
+      </v-snackbar>
       </v-content>
   </div>
 </template>
@@ -64,7 +67,8 @@ export default {
         password: ''
       },
       user: [],
-      role: []
+      role: [],
+      snackbar: false
     }
   },
   methods: {
@@ -89,7 +93,7 @@ export default {
           this.$router.replace({ name: 'home' })
         })
         .catch(e => {
-          alert('The username and / or password is incorrect')
+          this.snackbar = true
         })
     }
   }
