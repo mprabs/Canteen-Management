@@ -44,6 +44,15 @@
                   </v-row>
               </v-container>
         </v-img>
+        <v-snackbar
+          v-model="snackbar"
+          right
+          :timeout="2000"
+          color="red lighten-1"
+          top
+          >The username and/or password is incorrect
+      <v-icon dark @click="snackbar = false" >mdi-close</v-icon>
+      </v-snackbar>
       </v-content>
   </div>
 </template>
@@ -58,7 +67,8 @@ export default {
         password: ''
       },
       user: [],
-      role: []
+      role: [],
+      snackbar: false
     }
   },
   methods: {
@@ -83,7 +93,7 @@ export default {
           this.$router.replace({ name: 'home' })
         })
         .catch(e => {
-          alert('The username and / or password is incorrect')
+          this.snackbar = true
         })
     }
   }

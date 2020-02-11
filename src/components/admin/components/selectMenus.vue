@@ -1,80 +1,80 @@
 <template>
 <div id="menuList" >
-  Items for the date of
-  <v-col cols="12" lg="6">
+  <v-snackbar
+          v-model="snackbar"
+          right
+          :timeout="2000"
+          :color='color'
+          top
+          >{{ text }}
+      <v-icon dark @click="snackbar = false" >mdi-close</v-icon>
+      </v-snackbar>
+  <v-card-title>Date
         <v-menu
           ref="menu1"
           v-model="menu1"
           :close-on-content-click="true"
           transition="scale-transition"
           offset-y
-          max-width="290px"
-          min-width="290px"
         >
           <template v-slot:activator="{ on }">
-            <v-text-field
+           <v-col md="2">
+           <v-spacer/><v-text-field
               v-model="dateFormatted"
+              solo filled hide-details rounded dense flat
               @blur="date = parseDate(dateFormatted)"
               v-on="on"
-            ></v-text-field>
+            ></v-text-field></v-col>
           </template>
           <v-date-picker v-model="date" no-title @input="checkItems(date)"></v-date-picker>
         </v-menu>
-      </v-col>
-  <input type="text" v-model="search" v-on:input="filteredItems" placeholder="Search here...">
-    <tbody style="display:inline-block;">
-    <tr v-for="content in searchItems" :key="content.id" style="color:gray">
-    <td @click="selectElement(content)" style="cursor: default">
-      {{ content.name }}
-    </td><br>
-    </tr>
-    </tbody>
-    <hr style="visibility: hidden; ">
-  <v-container class="fill-height" fluid>
+        <v-spacer /><v-col md="2">
+          <v-text-field
+            v-model="search"
+            label="Search"
+            solo filled rounded hide-details dense clearable flat
+            prepend-inner-icon="mdi-magnify"
+          ></v-text-field>
+        </v-col>
+        <v-btn tile depressed @click="pushItems(date)"> Verify </v-btn>
+  </v-card-title>
+
+ <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
+
           <v-col cols="12" sm="8" md="6">
-    <v-simple-table fixed-header height="250px">
-    <template>
-      <thead >
-        <tr >
-          <th class="text-left">Items Available</th>
-          <br>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in items" :key="item.id" @click="selectElement(item)" style="line-height: 18px; height: 8px; cursor: pointer">
-        <td>
-          {{ item.name }}
-        </td>
-       </tr>
-      </tbody>
+            <v-card>
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            class="elevation-1"
+            :search="search"
+            fixed-header
+            height="300px"
+            >
+            <template v-slot:item.name="{ item }">
+      <p @click="selectElement(item)">{{ item.name }}</p>
     </template>
-  </v-simple-table>
-  </v-col>
-  <v-spacer/><v-col cols="12" sm="8" md="6">
-<v-simple-table fixed-header height="250px">
-    <template>
-      <thead>
-        <tr>
-          <th class="text-left">Items for Selected Day </th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        <tr  v-for="thing in displayarray" :key="thing.id" style="cursor: pointer">
-        <td> {{ thing.name }} </td>
-        <td @click="removeItem(thing.id)" style="cursor:pointer" class="text-right" >
-          <v-btn icon>
-                <v-icon color="red">mdi-close</v-icon>
-                </v-btn></td>
-      </tr>
-      </tbody>
+      </v-data-table>
+  </v-card></v-col>
+
+<v-spacer/>
+<v-col cols="12" sm="8" md="6">
+            <v-card>
+          <v-data-table
+            :headers="header"
+            :items="displayarray"
+            class="elevation-1"
+            fixed-header
+            height="300px"
+            >
+   <template v-slot:item.action="{ item }">
+      <v-icon small @click="removeItem(item.id)" >mdi-delete</v-icon>
     </template>
-  </v-simple-table>
-  </v-col>
+      </v-data-table>
+  </v-card></v-col>
         </v-row>
   </v-container>
-<v-btn block depressed @click="pushItems(date)"> Verify </v-btn>
 
   </div>
 </template>
@@ -85,6 +85,7 @@ export default {
   name: 'menuList',
   data () {
     return {
+      snackbar: false,
       selectItem: [],
       dateToday: '',
       anyDate: '',
@@ -98,7 +99,23 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
       menu1: false,
-      menu2: false
+      menu2: false,
+      headers: [
+        {
+          text: 'Items Available',
+          align: 'left',
+          value: 'name'
+        },
+        { align: 'right', value: 'action', sortable: false }
+      ],
+      header: [
+        {
+          text: 'Menu',
+          align: 'left',
+          value: 'name'
+        },
+        { align: 'right', value: 'action', sortable: false }
+      ]
     }
   },
   methods: {
@@ -107,7 +124,9 @@ export default {
       this.searchItems.splice(0, this.searchItems.length)
       var check = this.isExist(item.id)
       if (check === 'exists') {
-        alert('Already selected !')
+        this.snackbar = true
+        this.color = 'red'
+        this.text = 'Item already added'
       } else {
         this.selectItem.push(item.id)
         this.displayarray.push(item)
@@ -149,7 +168,9 @@ export default {
           food_item: ItemsArray
         })
       }
-      alert('Verified!')
+      this.snackbar = true
+      this.color = 'green'
+      this.text = 'success'
     },
     checkItems: function (dateSelected) {
       // console.log(dateSelected)
