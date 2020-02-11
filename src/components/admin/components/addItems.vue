@@ -47,9 +47,9 @@ export default {
     loadItems: function () {
       this.$store.dispatch('loadItems')
     },
-    handleRemove: function (id) {
-      this.removeElement(id)
-      this.loadItems()
+    async handleRemove (id) {
+      await this.removeElement(id)
+      window.history.go()
     }
   },
   computed: {
@@ -57,7 +57,7 @@ export default {
       return this.$store.getters.items
     }
   },
-  mounted: function () {
+  mounted () {
     this.$store.dispatch('loadItems')
   }
 }

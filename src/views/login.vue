@@ -69,7 +69,7 @@ export default {
           password: this.input.password })
         .then(response => {
           if (response.data) {
-            console.log(response.data.user.username)
+            // console.log(response.data.user.username)
             this.user = response.data.token
             this.role = response.data
             localStorage.setItem('userdetails', JSON.stringify(response.data.token))

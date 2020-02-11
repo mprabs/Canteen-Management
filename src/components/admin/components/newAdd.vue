@@ -29,16 +29,12 @@ export default {
       if (this.name === '') {
         alert('Enter something to add !')
       } else {
-        console.log('add')
         this.$store.dispatch('addItem', this.name)
         this.name = ''
       }
     },
     handleClick: function (name) {
       this.addEntry(name)
-      this.reload()
-    },
-    reload: function () {
       window.history.go()
     }
   }

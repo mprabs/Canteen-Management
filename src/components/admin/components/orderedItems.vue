@@ -20,7 +20,7 @@
             height="300px"
             >
     <template v-slot:item.action="{ item }">
-      <v-icon small @click="handleRemove(item.id, index)" color="red darken-1">mdi-delete</v-icon>
+      <v-icon small @click="handleRemove(item.id)" color="red darken-1">mdi-delete</v-icon>
     </template>
   </v-data-table>
   </v-card>
@@ -72,11 +72,14 @@ export default {
       return this.$store.getters.items
     }
   },
-  mounted () {
-    this.$store.dispatch('getOrder')
-    this.$store.dispatch('loadItems')
-    this.$store.dispatch('loadSelectedItems')
-    this.foodname()
+  created () {
+    Promise.all([
+      this.$store.dispatch('getOrder'),
+      this.$store.dispatch('loadItems'),
+      this.$store.dispatch('loadSelectedItems')
+    ]).then(
+      this.foodname()
+    )
   }
 }
 </script>

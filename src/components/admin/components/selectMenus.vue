@@ -221,10 +221,13 @@ export default {
     }
   },
   mounted () {
-    this.dateToday = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
-    this.$store.dispatch('loadItems')
-    this.$store.dispatch('loadSelectedItems')
-    this.checkItems(new Date().toJSON().slice(0, 10))
+    Promise.all([
+      this.$store.dispatch('loadItems'),
+      this.$store.dispatch('loadSelectedItems')
+    ]).then(
+      this.checkItems(new Date().toJSON().slice(0, 10)),
+      this.dateToday = new Date().toJSON().slice(0, 10).replace(/-/g, '/')
+    )
   }
 }
 
