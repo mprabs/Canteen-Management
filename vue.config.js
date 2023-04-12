@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/Canteen-Management/' : '/',
+  publicPath: '/Canteen-Management/',
   'transpileDependencies': [
     'vuetify'
   ]
