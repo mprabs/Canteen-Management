@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { instance } from '/home/prabin/Desktop/Canteen/src/store/axiosheader.js'
+import { instance } from '../../../store/axiosheader.js'
 export default {
   name: 'menuList',
   data () {

@@ -11,11 +11,10 @@
                   <v-card class="elevation-12" height="auto">
                       <v-toolbar flat >
                         <v-spacer />
-                        <v-img
-                          src="../assets/aayulogic.png"
-                          height="30"
-                          width="20"
-                        ></v-img>
+                        <h3 style="opacity: 0.75;
+    color: #1976d2;
+    text-transform: uppercase;
+    font-size: 1.5rem;">Canteen Management System</h3>
                       </v-toolbar>
                       <hr color="blue" >
                       <v-card-text >
